@@ -1,0 +1,20 @@
+._ {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 550;
+  text-transform: uppercase;
+  letter-spacing: 0.05ex;
+  width: fit-content;
+  border-radius: 2px;
+  padding: 4px calc(6px - 0.05ex) 4px 6px;
+}
+
+._green {
+  background-color: #e5fcf4;
+  color: #0f8468;
+}
+
+._yellow {
+  background-color: #fffbed;
+  color: #b55a0b;
+}

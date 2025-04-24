@@ -1,0 +1,23 @@
+._ {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 344px;
+  max-width: calc(100% - 16px);
+  padding: 12px;
+}
+
+@container (max-width: 720px) {
+  ._ {
+    position: static;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.header {
+  font-family: var(--font-atipla);
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}

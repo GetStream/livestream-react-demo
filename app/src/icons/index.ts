@@ -1,0 +1,17 @@
+export { default as arrow_drop_up } from './arrow_drop_up.svg?url';
+export { default as bullet } from './bullet.svg?url';
+export { default as call_end } from './call_end.svg?url';
+export { default as close } from './close.svg?url';
+export { default as copy } from './copy.svg?url';
+export { default as info } from './info.svg?url';
+export { default as key } from './key.svg?url';
+export { default as link } from './link.svg?url';
+export { default as mic } from './mic.svg?url';
+export { default as mic_off } from './mic_off.svg?url';
+export { default as present } from './present.svg?url';
+export { default as recording } from './recording.svg?url';
+export { default as spinner } from './spinner.svg?url';
+export { default as unfold } from './unfold.svg?url';
+export { default as verified } from './verified.svg?url';
+export { default as videocam } from './videocam.svg?url';
+export { default as videocam_off } from './videocam_off.svg?url';

@@ -1,0 +1,23 @@
+._ {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+._spin {
+  animation: rotate linear infinite 1s;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

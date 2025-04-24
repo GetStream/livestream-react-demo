@@ -1,0 +1,23 @@
+.header {
+  padding: 24px;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+}
+
+@container (max-width: 720px) {
+  .header {
+    padding: 16px 8px;
+  }
+
+  .main {
+    padding: 0 8px;
+  }
+
+  .footer {
+    display: none;
+  }
+}

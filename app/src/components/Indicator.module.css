@@ -1,0 +1,16 @@
+._ {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fafafa;
+  padding: 4px 8px;
+}
+
+._ small {
+  font-size: 1em;
+  color: #656b72;
+}
+
+.icon {
+  color: #00e2a1;
+}

@@ -1,0 +1,34 @@
+.label {
+  display: block;
+  font-family: var(--font-cofo-sans);
+  font-size: 11px;
+  font-weight: 440;
+  line-height: 12px;
+  color: #ffffff73;
+  margin-bottom: 2px;
+}
+
+.trigger {
+  font-family: var(--font-cofo-sans);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff40;
+  padding: 3px;
+  border: 1px solid #ffffff3d;
+  border-radius: 4px;
+}
+
+.menu {
+  width: max-content;
+  padding: 8px 0;
+}
+
+.menu :global(.react-aria-ListBoxItem) {
+  padding: 4px 16px;
+  cursor: default;
+}
+
+.menu :global(.react-aria-ListBoxItem[data-focused]) {
+  background: rgba(255, 255, 255, 0.05);
+}

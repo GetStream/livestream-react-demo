@@ -1,0 +1,22 @@
+._ {
+  font-family: var(--font-cofo-sans);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.counter {
+  font-family: var(--font-cofo-mono);
+  font-size: 71px;
+  line-height: 80px;
+}
+
+.cta {
+  padding: 8px;
+}
+
+.participants {
+  color: #ffffff80;
+}

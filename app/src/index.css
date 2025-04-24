@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "CoFo Sans";
+  src: url("/cofosans-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CoFo Sans Mono";
+  src: url("/cofosansmono-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atipla ND";
+  src: url("/atipland-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --font-cofo-sans: "CoFo Sans", sans-serif;
+  --font-cofo-mono: "CoFo Sans Mono", monospace;
+  --font-atipla: "Atipla ND", sans-serif;
+}
+
+body {
+  background: #000000;
+  color: #ffffff;
+  margin: 0;
+  font: 13px / 20px var(--font-cofo-mono);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  font: inherit;
+  color: currentColor;
+}

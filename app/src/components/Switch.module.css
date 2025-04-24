@@ -1,0 +1,44 @@
+._ {
+  display: block;
+  padding-bottom: 30px;
+  position: relative;
+  font-family: var(--font-cofo-sans);
+  font-size: 11px;
+  font-weight: 440;
+  line-height: 12px;
+  color: #ffffff73;
+  min-width: 36px;
+}
+
+._::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: #222a33;
+}
+
+._[data-selected]::before {
+  background: #006aff;
+}
+
+._::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  bottom: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 1px 2px -0.5px #000b160a, 0px 0.75px 0.5px 0px #0000001f,
+    0px -0.5px 0px 0px #0c0d0e66 inset;
+  background: #fff;
+  transition: transform 0.1s ease-out;
+}
+
+._[data-selected]::after {
+  transform: translateX(16px);
+}

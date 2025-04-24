@@ -1,0 +1,7 @@
+{
+  "name": "@stream-io/livestream-react-demo-root",
+  "private": true,
+  "author": "https://getstream.io",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.0"
+}
