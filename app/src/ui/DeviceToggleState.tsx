@@ -1,4 +1,4 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext } from "react";
 
 export interface DeviceToggleState {
   isPending: boolean;
@@ -9,12 +9,3 @@ export const DeviceToggleStateContext = createContext<DeviceToggleState>({
   isPending: false,
   isEnabled: false,
 });
-
-export interface DeviceToggleStateProps {
-  children: (state: DeviceToggleState) => ReactNode;
-}
-
-export function WithDeviceToggleState(props: DeviceToggleStateProps) {
-  const state = useContext(DeviceToggleStateContext);
-  return props.children(state);
-}

@@ -4,12 +4,13 @@ import screenStyles from "./Screen.module.css";
 import styles from "./BroadcastMethodScreen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { FeatureList } from "./FeatureList";
+import { BgVideo } from "./BgVideo";
 
 export function BroadcastMethodScreen(props: {
   onSelect: (method: string) => void;
 }) {
   return (
-    <div className={screenStyles._}>
+    <div className={clsx(screenStyles._, styles._)}>
       <div className={clsx(screenStyles.header, styles.header)}>
         <div className={toolbarStyles._}>
           <span>Select broadcast method:</span>
@@ -23,6 +24,7 @@ export function BroadcastMethodScreen(props: {
       <div className={clsx(screenStyles.footer, styles.footer)}>
         <FeatureList />
       </div>
+      <BgVideo />
     </div>
   );
 }

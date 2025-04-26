@@ -38,13 +38,20 @@ body {
   color: #ffffff;
   margin: 0;
   font: 13px / 20px var(--font-cofo-mono);
+  overflow: hidden;
 }
 
 #root {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+  padding: 24px;
 }
 
 button {
   font: inherit;
+  color: currentColor;
+}
+
+a {
   color: currentColor;
 }

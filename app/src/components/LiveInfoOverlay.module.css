@@ -1,10 +1,8 @@
 ._ {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 344px;
-  max-width: calc(100% - 16px);
+  display: flex;
+  flex-direction: column;
   padding: 12px;
+  gap: 16px;
 }
 
 @container (max-width: 720px) {
@@ -15,9 +13,24 @@
   }
 }
 
-.header {
+.title {
   font-family: var(--font-atipla);
   font-size: 18px;
   font-weight: 400;
   margin: 0;
+}
+
+.tutorial {
+  font-family: var(--font-cofo-sans);
+}
+
+.tutorial ol {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.spacer {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #ffffff1a;
 }

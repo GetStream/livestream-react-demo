@@ -1,6 +1,6 @@
 import styles from "./CopyableValue.module.css";
 import { Icon, type IconProps } from "./Icon";
-import { Button } from "react-aria-components";
+import { Button, Input, Label, Text, TextField } from "react-aria-components";
 import buttonStyles from "./Button.module.css";
 import clsx from "clsx";
 import type { ReactNode } from "react";
@@ -12,11 +12,14 @@ export function CopyableValue(props: {
   children: string;
 }) {
   return (
-    <div className={styles._}>
-      {props.label && <div className={styles.label}>{props.label}</div>}
+    <TextField className={styles._} value={props.children} isReadOnly>
+      {props.label && <Label className={styles.label}>{props.label}</Label>}
       <div className={styles.pseudoinput}>
         <Icon className={styles.icon} icon={props.icon} size={16} />
-        <div className={styles.value}>{props.children}</div>
+        <Input
+          className={styles.value}
+          onFocus={(event) => event.currentTarget.select()}
+        />
         <Button
           className={clsx(styles.copy, buttonStyles._, buttonStyles._subtle)}
           onPress={() => {
@@ -27,8 +30,10 @@ export function CopyableValue(props: {
         </Button>
       </div>
       {props.description && (
-        <div className={styles.label}>{props.description}</div>
+        <Text slot="description" className={styles.label}>
+          {props.description}
+        </Text>
       )}
-    </div>
+    </TextField>
   );
 }

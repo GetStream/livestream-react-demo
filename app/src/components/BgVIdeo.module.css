@@ -1,0 +1,15 @@
+._ {
+  object-fit: cover;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  transition: opacity 1s;
+}
+
+._ready {
+  opacity: 0.2;
+}

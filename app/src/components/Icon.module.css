@@ -9,6 +9,7 @@
 }
 
 ._spin {
+  margin: 0 auto;
   animation: rotate linear infinite 1s;
 }
 

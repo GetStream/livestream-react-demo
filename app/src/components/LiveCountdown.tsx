@@ -4,54 +4,61 @@ import buttonStyles from "./Button.module.css";
 import clsx from "clsx";
 import { useCallStateHooks } from "@stream-io/video-react-sdk";
 import { useEffect, useState } from "react";
+import { getSecondsUntil, secondsToClock } from "./clock";
+import { useEffectEvent } from "../ui/useEffectEvent";
+import { Spinner } from "./Icon";
+import { useSessionParticipantCount } from "./participants";
 
-const startsAt = Date.now() + 3600_000;
-
-export function LiveCountdown() {
+export function LiveCountdown(props: {
+  isLivePending: boolean;
+  onGoLive: () => void;
+}) {
   const { useCallStartsAt } = useCallStateHooks();
-  // const startsAt = useCallStartsAt();
+  const startsAt = useCallStartsAt();
   const [totalSecondsLeft, setTotalSecondsLeft] = useState(() =>
-    getSecondsLeft(startsAt)
+    getSecondsUntil(startsAt)
   );
+  const participantCount = useSessionParticipantCount().user;
+
+  const handleGoLive = useEffectEvent(props.onGoLive);
 
   useEffect(() => {
     const handle = setInterval(() => {
-      setTotalSecondsLeft(getSecondsLeft(startsAt));
-    }, 100);
-    return () => clearInterval(handle);
-  }, [startsAt]);
+      const totalSecondsLeft = getSecondsUntil(startsAt);
+      setTotalSecondsLeft(totalSecondsLeft);
 
-  const minutesLeft = Math.floor(totalSecondsLeft / 60)
-    .toString()
-    .padStart(2, "0");
-  const secondsLeft = (totalSecondsLeft % 60).toString().padStart(2, "0");
+      if (totalSecondsLeft === 0) {
+        clearInterval(handle);
+        handleGoLive();
+      }
+    }, 100);
+
+    return () => clearInterval(handle);
+  }, [handleGoLive, startsAt]);
+
+  const [min, sec] = secondsToClock(totalSecondsLeft);
 
   return (
     <div className={styles._}>
-      {Number.isFinite(totalSecondsLeft) && (
-        <>
-          <div>Livestream will start in:</div>
-          <div className={styles.counter}>
-            {minutesLeft}:{secondsLeft}
-          </div>
-        </>
-      )}
+      <div>Livestream will start in:</div>
+      <div className={styles.counter}>
+        {min}:{sec}
+      </div>
       <Button
         className={clsx(buttonStyles._, buttonStyles._primary, styles.cta)}
+        isPending={props.isLivePending}
+        onPress={props.onGoLive}
       >
-        Go live now
+        {props.isLivePending ? <Spinner /> : <>Go live now</>}
       </Button>
-      <div className={styles.participants}>
-        3 participants have joined early
+      <div
+        className={clsx(
+          styles.participants,
+          participantCount === 0 && styles.participants_empty
+        )}
+      >
+        {participantCount} participants have joined early
       </div>
     </div>
   );
-}
-
-function getSecondsLeft(startsAt: Date | undefined) {
-  if (typeof startsAt === "number") {
-    return Math.ceil((startsAt - Date.now()) / 1000);
-  }
-
-  return Number.NaN;
 }

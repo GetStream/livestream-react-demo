@@ -1,10 +1,13 @@
-.header {
-  padding: 24px;
+._ {
+  border: 1px solid #ffffff1a;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 
-.main {
-  display: flex;
-  align-items: center;
+.header,
+.main,
+.footer {
   padding: 24px;
 }
 
@@ -14,7 +17,7 @@
   }
 
   .main {
-    padding: 0 8px;
+    padding: 0 8px 8px;
   }
 
   .footer {

@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  padding: 24px;
 }
 
 .feature {
@@ -20,4 +19,13 @@
 .description {
   font-family: var(--font-cofo-sans);
   margin: 0;
+}
+
+.icon {
+  margin-bottom: 8px;
+}
+
+.icon :global(.str-icon) {
+  background: linear-gradient(0deg, #ffffffb3, #ffffffb3),
+    linear-gradient(180deg, #000000 0%, #00000033 100%) #ffffffb2;
 }

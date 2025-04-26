@@ -1,32 +1,74 @@
 import clsx from "clsx";
+import { useState } from "react";
+import { Backstage } from "./Backstage";
+import { BgVideo } from "./BgVideo";
+import { CallControls } from "./CallControls";
+import { LiveDurationIndicator } from "./LiveDurationIndicator";
+import { LiveInfoOverlay } from "./LiveInfoOverlay";
+import LivePlayer from "./LivePlayer";
+import styles from "./LiveScreen.module.css";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
-import { CallControls } from "./CallControls";
-import { Indicator } from "./Indicator";
-import { LiveInfoOverlay } from "./LiveInfoOverlay";
-import { LiveCountdown } from "./LiveCountdown";
+import { useBackstage } from "./useBackstage";
+import { useBroadcastMethod } from "./useBroadcastMethod";
+import { useSessionParticipantCount } from "./participants";
+import { PingIndicator } from "./PingIndicator";
 
 export function LiveScreen() {
+  const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(true);
+  const { isLive, isLivePending, handleGoLive } = useBackstage();
+  const method = useBroadcastMethod();
+  const participantCount = useSessionParticipantCount().user;
+
+  const handleAction = (action: string) => {
+    if (action === "info") {
+      setIsInfoOverlayOpen(true);
+    }
+  };
+
   return (
-    <div className={screenStyles._}>
-      <div className={clsx(screenStyles.header)}>
-        <div className={toolbarStyles._}>
-          <span>WebRTC livestream</span>
-          <i className={toolbarStyles.spacer} />
-          <Indicator icon="verified">
-            <small>00</small>:33
-          </Indicator>
-          <Indicator icon="bullet">
-            15 <small>ms</small>
-          </Indicator>
+    <div className={clsx(screenStyles._, styles._)}>
+      <div
+        className={clsx(screenStyles.header, styles.header, toolbarStyles._)}
+      >
+        <div>
+          <h3 className={styles.title}>
+            {method === "rtmp" ? <>RTMP</> : <>WebRTC</>} livestream
+          </h3>
+          {isLive && participantCount > 0 && (
+            <div className={styles.subtitle}>
+              {participantCount} participants
+            </div>
+          )}
         </div>
+        <i className={toolbarStyles.spacer} />
+        {isLive && (
+          <>
+            <LiveDurationIndicator />
+            <PingIndicator />
+          </>
+        )}
       </div>
-      <div className={clsx(screenStyles.main)}>
-        <LiveCountdown />
-        <LiveInfoOverlay />
+      <div className={clsx(screenStyles.main, styles.main)}>
+        {isLive ? (
+          <div className={styles.player}>
+            <LivePlayer />
+            <BgVideo />
+          </div>
+        ) : (
+          <div className={styles.backstage}>
+            <Backstage isLivePending={isLivePending} onGoLive={handleGoLive} />
+            <BgVideo />
+          </div>
+        )}
+        {isInfoOverlayOpen && (
+          <div className={styles.overlay}>
+            <LiveInfoOverlay onClose={() => setIsInfoOverlayOpen(false)} />
+          </div>
+        )}
       </div>
       <div className={clsx(screenStyles.footer)}>
-        <CallControls />
+        <CallControls onAction={handleAction} />
       </div>
     </div>
   );

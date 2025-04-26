@@ -4,17 +4,27 @@ import glassStyles from "./Glass.module.css";
 import buttonStyles from "./Button.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import clsx from "clsx";
-import { Button } from "react-aria-components";
+import { Button, Link } from "react-aria-components";
 import { Icon } from "./Icon";
+import { useCall } from "@stream-io/video-react-sdk";
+import { useClient } from "../client";
+import { useBroadcastMethod } from "./useBroadcastMethod";
 
 export function LiveInfoOverlay(props: { onClose?: () => void }) {
-  const callId =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, fugiat voluptate quae eos alias sint necessitatibus. Eligendi porro ipsam iusto perspiciatis, ullam dolore dolorum obcaecati! Aliquam, excepturi?";
+  const client = useClient();
+  const call = useCall();
+  const method = useBroadcastMethod();
+
+  if (!client || !call) {
+    return null;
+  }
+
+  const joinUrl = `${location.origin}/?view=${call.id}`;
 
   return (
     <div className={clsx(styles._, glassStyles._, glassStyles._overlay)}>
       <div className={toolbarStyles._}>
-        <h4 className={styles.header}>Success</h4>
+        <h4 className={styles.title}>Success</h4>
         <i className={toolbarStyles.spacer} />
         <Button
           className={clsx(buttonStyles._, buttonStyles._subtle)}
@@ -28,7 +38,7 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
         description={<>Share this with your participants to join.</>}
         icon="link"
       >
-        {callId}
+        {joinUrl}
       </CopyableValue>
       <div className={toolbarStyles._}>
         <div>
@@ -36,12 +46,47 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
           friend by sending them this URL:
         </div>
         <img
-          alt={callId}
+          alt={joinUrl}
           src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(
-            callId
+            joinUrl
           )}`}
         />
       </div>
+      <hr className={styles.spacer} />
+      {method === "rtmp" ? (
+        <>
+          <div className={styles.tutorial}>
+            We recommend that you take a few mins to look at the tutorial on{" "}
+            <Link
+              href="https://getstream.io/video/sdk/react/tutorial/livestreaming/#step-2-setup-the-livestream-in-obs"
+              target="_top"
+            >
+              setting up OBS
+            </Link>
+            :
+            <ol>
+              <li>
+                Add the following credentials to the settings, under Stream.
+              </li>
+              <li>Start streaming.</li>
+            </ol>
+          </div>
+          <CopyableValue label={<>Server URL</>} icon="link">
+            {call.state.ingress?.rtmp.address ?? ""}
+          </CopyableValue>
+          <CopyableValue label={<>Stream Key</>} icon="link">
+            {client.streamClient.tokenManager.getToken() ?? ""}
+          </CopyableValue>
+        </>
+      ) : (
+        <div className={styles.tutorial}>
+          You can use your virtual camera to stream from software like OBS:
+          <ol>
+            <li>Start virtual camera in your broadcasting software</li>
+            <li>Select virtual camera from the camera menu below</li>
+          </ol>
+        </div>
+      )}
     </div>
   );
 }

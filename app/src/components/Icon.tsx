@@ -30,7 +30,7 @@ function useIcon(props: IconProps) {
 
   return {
     props: {
-      className: clsx(styles._, props.spin && styles._spin),
+      className: clsx(styles._, props.spin && styles._spin, "str-icon"),
       style: {
         maskImage: `url("${iconUrl}")`,
         ...sizeStyles,

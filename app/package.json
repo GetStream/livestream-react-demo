@@ -12,6 +12,7 @@
   "dependencies": {
     "@stream-io/video-react-sdk": "^1.14.3",
     "clsx": "^2.1.1",
+    "nanoid": "^5.1.5",
     "react": "^19.0.0",
     "react-aria": "^3.39.0",
     "react-aria-components": "^1.8.0",

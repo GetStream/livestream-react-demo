@@ -1,13 +1,16 @@
 ._ {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
   container-type: inline-size;
 }
 
 .main {
   flex-grow: 1;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
