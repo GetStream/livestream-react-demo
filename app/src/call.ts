@@ -72,7 +72,7 @@ export function useGetCall(
       const call = client.call("livestream", callId);
 
       call
-        .get()
+        .join()
         .then(() => {
           if (!cancel) {
             setCall(call);

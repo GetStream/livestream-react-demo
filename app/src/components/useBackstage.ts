@@ -1,21 +1,22 @@
-import { useCall, useCallStateHooks, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 import { goLive } from "../call";
 import { useState } from "react";
+import { useViewerMode } from "./ViewerModeContext";
 
 export function useBackstage() {
-  const client = useStreamVideoClient();
   const call = useCall();
+  const mode = useViewerMode();
   const { useIsCallLive } = useCallStateHooks();
   const isLive = useIsCallLive();
   const [isLivePending, setIsLivePending] = useState(false);
 
   const handleGoLive = async () => {
-    if (!call) {
-      console.error("Call is not initialized");
+    if (mode === "viewer") {
       return;
     }
 
-    if (!call.state.localParticipant?.roles.includes('host')) {
+    if (!call) {
+      console.error("Call is not initialized");
       return;
     }
 
@@ -32,6 +33,6 @@ export function useBackstage() {
   return {
     isLive,
     isLivePending,
-    handleGoLive: ,
+    handleGoLive,
   };
 }

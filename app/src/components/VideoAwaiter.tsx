@@ -4,11 +4,13 @@ import { useEffectEvent } from "../ui/useEffectEvent";
 import { Spinner } from "./Icon";
 import { useHostParticipant, useSessionParticipantCount } from "./participants";
 import styles from "./VideoAwaiter.module.css";
+import { useViewerMode } from "./ViewerModeContext";
 
 export function VideoAwaiter(props: {
   isLivePending: boolean;
   onGoLive: () => void;
 }) {
+  const mode = useViewerMode();
   const host = useHostParticipant();
   const handleGoLive = useEffectEvent(props.onGoLive);
   const participantCount = useSessionParticipantCount().user;
@@ -21,8 +23,17 @@ export function VideoAwaiter(props: {
 
   return (
     <div className={styles._}>
-      <div>Waiting on external software</div>
-      <Spinner size={80} />
+      {mode === "host" && (
+        <>
+          <div>Waiting on external software</div>
+          <Spinner size={80} />
+        </>
+      )}
+      {mode === "viewer" && (
+        <>
+          <div>Livestream will start soon</div>
+        </>
+      )}
       <div
         className={clsx(
           styles.participants,

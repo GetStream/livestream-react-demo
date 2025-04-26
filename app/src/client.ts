@@ -1,8 +1,9 @@
 import { StreamVideoClient } from "@stream-io/video-react-sdk";
+import { humanId } from "human-id";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 
-export function useClient() {
+export function useClient(mode: "host" | "viewer") {
   const [client, setClient] = useState<StreamVideoClient | undefined>(
     undefined
   );
@@ -11,7 +12,7 @@ export function useClient() {
     let cancel = false;
     let client: StreamVideoClient | undefined;
 
-    getDemoCredentials()
+    getDemoCredentials(mode)
       .then((credentials) => {
         if (cancel) {
           throw new Error("Connection canceled");
@@ -19,7 +20,10 @@ export function useClient() {
 
         client = new StreamVideoClient(credentials.apiKey);
         return client.connectUser(
-          { id: credentials.userId, name: "Host" },
+          {
+            id: credentials.userId,
+            name: mode === "host" ? "Host" : humanId({ capitalize: true }),
+          },
           credentials.token
         );
       })
@@ -41,14 +45,14 @@ export function useClient() {
       });
       setClient(undefined);
     };
-  }, []);
+  }, [mode]);
 
   return client;
 }
 
-async function getDemoCredentials() {
+async function getDemoCredentials(mode: string) {
   const params = new URLSearchParams({
-    user_id: `host-${nanoid()}`,
+    user_id: `${mode}-${nanoid()}`,
     environment: "livestream",
     exp: String(4 * 60 * 60), // 4 hours
   });

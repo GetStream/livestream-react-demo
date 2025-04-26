@@ -1,26 +1,36 @@
 import { type Call, StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { BroadcastMethodScreen } from "./components/BroadcastMethodScreen";
 import { LiveScreen } from "./components/LiveScreen";
 import { useClient } from "./client";
 import { createCall, useCallEnded, useGetCall } from "./call";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { ViewerModeContext } from "./components/ViewerModeContext";
+import { FinalScreen } from "./components/FinalScreen";
 
 const params = new URLSearchParams(location.search);
 const viewCallId = params.get("view");
+const mode = viewCallId ? ("viewer" as const) : ("host" as const);
 
 function App() {
-  const client = useClient();
+  const client = useClient(mode);
+  const viewerModeContextValue = useMemo(() => ({ mode }), []);
   const [hostCall, setHostCall] = useState<Call | undefined>(undefined);
-  const viewCall = useGetCall(client, viewCallId);
+  let viewCall = useGetCall(client, viewCallId);
   const [hasEnded, setHasEnded] = useState(false);
 
-  useCallEnded(hostCall, () => {
+  if (hasEnded) {
+    viewCall = undefined;
+  }
+
+  const handleCallEnded = () => {
     setHostCall(undefined);
     setHasEnded(true);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (window as any)._call;
-  });
+  };
+
+  useCallEnded(hostCall ?? viewCall, handleCallEnded);
 
   const handleCreateCall = async (method: string) => {
     if (!client) {
@@ -42,18 +52,24 @@ function App() {
     return <LoadingScreen />;
   }
 
-  if (viewCallId && !viewCall) {
+  if (hasEnded) {
+    return <FinalScreen />;
+  }
+
+  if (mode === "viewer" && !viewCall) {
     return <LoadingScreen />;
   }
 
-  if (!viewCallId && !hostCall) {
+  if (mode === "host" && !hostCall) {
     return <BroadcastMethodScreen onSelect={handleCreateCall} />;
   }
 
   return (
     <StreamVideo client={client}>
       <StreamCall call={hostCall ?? viewCall}>
-        <LiveScreen />
+        <ViewerModeContext.Provider value={viewerModeContextValue}>
+          <LiveScreen onCallLeft={handleCallEnded} />
+        </ViewerModeContext.Provider>
       </StreamCall>
     </StreamVideo>
   );

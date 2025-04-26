@@ -8,11 +8,13 @@ import { getSecondsUntil, secondsToClock } from "./clock";
 import { useEffectEvent } from "../ui/useEffectEvent";
 import { Spinner } from "./Icon";
 import { useSessionParticipantCount } from "./participants";
+import { useViewerMode } from "./ViewerModeContext";
 
 export function LiveCountdown(props: {
   isLivePending: boolean;
   onGoLive: () => void;
 }) {
+  const mode = useViewerMode();
   const { useCallStartsAt } = useCallStateHooks();
   const startsAt = useCallStartsAt();
   const [totalSecondsLeft, setTotalSecondsLeft] = useState(() =>
@@ -44,13 +46,15 @@ export function LiveCountdown(props: {
       <div className={styles.counter}>
         {min}:{sec}
       </div>
-      <Button
-        className={clsx(buttonStyles._, buttonStyles._primary, styles.cta)}
-        isPending={props.isLivePending}
-        onPress={props.onGoLive}
-      >
-        {props.isLivePending ? <Spinner /> : <>Go live now</>}
-      </Button>
+      {mode === "host" && (
+        <Button
+          className={clsx(buttonStyles._, buttonStyles._primary, styles.cta)}
+          isPending={props.isLivePending}
+          onPress={props.onGoLive}
+        >
+          {props.isLivePending ? <Spinner /> : <>Go live now</>}
+        </Button>
+      )}
       <div
         className={clsx(
           styles.participants,

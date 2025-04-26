@@ -1,0 +1,85 @@
+import clsx from "clsx";
+import { Link } from "react-aria-components";
+import actionListStyles from "./ActionList.module.css";
+import badgeStyles from "./Badge.module.css";
+import { BgVideo } from "./BgVideo";
+import { FeatureList } from "./FeatureList";
+import styles from "./FinalScreen.module.css";
+import glassStyles from "./Glass.module.css";
+import { Icon } from "./Icon";
+import screenStyles from "./Screen.module.css";
+
+export function FinalScreen() {
+  return (
+    <div className={clsx(screenStyles._, styles._)}>
+      <div className={clsx(screenStyles.header, styles.header)}>
+        <Link className={styles.backlink} href="/">
+          <Icon icon="replay" size={14} /> Start over
+        </Link>
+      </div>
+      <div className={clsx(screenStyles.main, styles.main)}>
+        <div className={actionListStyles._}>
+          <Link
+            className={clsx(
+              actionListStyles.action,
+              actionListStyles.action_compact,
+              glassStyles._,
+              glassStyles._interactive
+            )}
+            href="https://getstream.io/try-for-free/"
+            target="_top"
+          >
+            <span className={clsx(badgeStyles._, badgeStyles._blue)}>
+              Get Started
+            </span>
+            <h4 className={actionListStyles.header}>Create a free account</h4>
+            <p className={actionListStyles.description}>
+              We hope you enjoyed the livestream experience. Get started for
+              free.
+            </p>
+          </Link>
+          <Link
+            className={clsx(
+              actionListStyles.action,
+              actionListStyles.action_compact,
+              glassStyles._,
+              glassStyles._interactive
+            )}
+            href="https://getstream.io/video/livestreaming/"
+            target="_top"
+          >
+            <span className={clsx(badgeStyles._, badgeStyles._purple)}>
+              Learn More
+            </span>
+            <h4 className={actionListStyles.header}>Livestream tutorial</h4>
+            <p className={actionListStyles.description}>
+              Learn how to build a fully functioning livestream experience.
+            </p>
+          </Link>
+          <Link
+            className={clsx(
+              actionListStyles.action,
+              actionListStyles.action_compact,
+              glassStyles._,
+              glassStyles._interactive
+            )}
+            href="https://getstream.io/video/livestreaming/"
+            target="_top"
+          >
+            <span className={clsx(badgeStyles._, badgeStyles._green)}>
+              Discover
+            </span>
+            <h4 className={actionListStyles.header}>Pricing</h4>
+            <p className={actionListStyles.description}>
+              Scale your livestreams with affordable plans.
+            </p>
+          </Link>
+        </div>
+      </div>
+      <div className={clsx(screenStyles.footer, styles.footer)}>
+        <FeatureList />
+      </div>
+      <BgVideo />
+    </div>
+  );
+}

@@ -1,10 +1,11 @@
 import { mergeProps } from "react-aria";
 import { Button, type ButtonProps } from "react-aria-components";
 import { useEffectEvent } from "./useEffectEvent";
-import { useCall } from "@stream-io/video-react-sdk";
+import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
 import { useState } from "react";
 
 export type EndCallButtonProps = {
+  onCallLeft?: () => void;
   onError?: (reason: unknown) => void;
 } & Omit<ButtonProps, "isPending">;
 
@@ -17,12 +18,16 @@ export function EndCallButton(props: EndCallButtonProps) {
 
 function useEndCallButton(props: EndCallButtonProps) {
   const call = useCall();
+  const { useOwnCapabilities } = useCallStateHooks();
+  const capabilities = useOwnCapabilities() ?? [];
+  const canEndCall = capabilities.includes("end-call");
   const [isPending, setIsPending] = useState(false);
 
   const onPress = useEffectEvent(async () => {
     try {
       setIsPending(true);
-      await call?.endCall();
+      await call?.[canEndCall ? "endCall" : "leave"]();
+      props.onCallLeft?.();
     } catch (err) {
       props.onError?.(err);
     } finally {

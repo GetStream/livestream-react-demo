@@ -10,28 +10,34 @@ import { Button } from "react-aria-components";
 import buttonStyles from "./Button.module.css";
 import { Icon } from "./Icon";
 import { useBroadcastMethod } from "./useBroadcastMethod";
+import { useViewerMode } from "./ViewerModeContext";
+import { MuteControl } from "./MuteControl";
 
 export function CallControls(props: { onAction?: (action: string) => void }) {
+  const mode = useViewerMode();
   const method = useBroadcastMethod();
 
   return (
     <div className={clsx(styles._, glassStyles._, toolbarStyles._)}>
-      <Button
-        className={clsx(buttonStyles._, buttonStyles._subtle)}
-        onPress={() => props.onAction?.("info")}
-      >
-        <Icon icon="info" />
-      </Button>
+      {mode === "host" && (
+        <Button
+          className={clsx(buttonStyles._, buttonStyles._subtle)}
+          onPress={() => props.onAction?.("info")}
+        >
+          <Icon icon="info" />
+        </Button>
+      )}
       <i className={toolbarStyles.spacer} />
-      <RecordingControl />
-      {method !== "rtmp" && (
+      {mode === "viewer" && <MuteControl />}
+      {mode === "host" && <RecordingControl />}
+      {method !== "rtmp" && mode === "host" && (
         <>
           <MicrophoneControl />
           <CameraControl />
           <ScreenShareControl />
         </>
       )}
-      <EndCallControl />
+      <EndCallControl onCallLeft={() => props.onAction?.("call-left")} />
       <i className={toolbarStyles.spacer} />
     </div>
   );

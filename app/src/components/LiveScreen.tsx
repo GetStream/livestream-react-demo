@@ -13,9 +13,11 @@ import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 import { useSessionParticipantCount } from "./participants";
 import { PingIndicator } from "./PingIndicator";
+import { useViewerMode } from "./ViewerModeContext";
 
-export function LiveScreen() {
-  const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(true);
+export function LiveScreen(props: { onCallLeft: () => void }) {
+  const mode = useViewerMode();
+  const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
   const { isLive, isLivePending, handleGoLive } = useBackstage();
   const method = useBroadcastMethod();
   const participantCount = useSessionParticipantCount().user;
@@ -23,6 +25,10 @@ export function LiveScreen() {
   const handleAction = (action: string) => {
     if (action === "info") {
       setIsInfoOverlayOpen(true);
+    }
+
+    if (action === "call-left") {
+      props.onCallLeft();
     }
   };
 

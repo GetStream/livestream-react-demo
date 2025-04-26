@@ -1,0 +1,33 @@
+._ {
+  border: 1px solid #ffffff1a;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header,
+.main,
+.footer {
+  padding: 24px;
+}
+
+.backlink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 8px;
+}
+
+@container (max-width: 720px) {
+  .header {
+    padding: 16px 8px;
+  }
+
+  .main {
+    padding: 0 8px 8px;
+  }
+
+  .footer {
+    display: none;
+  }
+}

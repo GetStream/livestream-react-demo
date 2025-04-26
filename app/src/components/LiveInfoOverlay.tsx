@@ -1,17 +1,16 @@
-import { CopyableValue } from "./CopyableValue";
-import styles from "./LiveInfoOverlay.module.css";
-import glassStyles from "./Glass.module.css";
-import buttonStyles from "./Button.module.css";
-import toolbarStyles from "./Toolbar.module.css";
+import { useCall, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import clsx from "clsx";
 import { Button, Link } from "react-aria-components";
+import buttonStyles from "./Button.module.css";
+import { CopyableValue } from "./CopyableValue";
+import glassStyles from "./Glass.module.css";
 import { Icon } from "./Icon";
-import { useCall } from "@stream-io/video-react-sdk";
-import { useClient } from "../client";
+import styles from "./LiveInfoOverlay.module.css";
+import toolbarStyles from "./Toolbar.module.css";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 
 export function LiveInfoOverlay(props: { onClose?: () => void }) {
-  const client = useClient();
+  const client = useStreamVideoClient();
   const call = useCall();
   const method = useBroadcastMethod();
 
