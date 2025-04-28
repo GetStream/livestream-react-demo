@@ -28,6 +28,17 @@
   flex-shrink: 0;
 }
 
+.copy {
+  color: #ffffff73;
+  padding: 2px;
+  margin: 0 -2px;
+}
+
+.copy:hover,
+.copy:active {
+  color: #fff;
+}
+
 .value {
   font: inherit;
   border: 0;

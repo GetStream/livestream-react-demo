@@ -5,6 +5,11 @@
   font-family: var(--font-atipla);
 }
 
+._[data-focus-visible] {
+  outline: 1px solid #005fff;
+  outline-offset: 1px;
+}
+
 ._primary {
   position: relative;
   isolation: isolate; /* introduce stacking context */

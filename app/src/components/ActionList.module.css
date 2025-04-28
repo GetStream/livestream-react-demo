@@ -22,6 +22,11 @@
   cursor: pointer;
 }
 
+.action[data-focus-visible] {
+  outline: 1px solid #005fff;
+  outline-offset: 1px;
+}
+
 .action_compact {
   max-width: 300px;
 }

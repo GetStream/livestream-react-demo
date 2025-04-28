@@ -11,6 +11,10 @@
   cursor: default;
 }
 
+.menu :global(.react-aria-MenuItem[data-focus-visible]) {
+  outline: 1px solid #005fff;
+}
+
 .menu :global(.react-aria-MenuItem[data-selected]::before) {
   content: "•";
   display: inline-block;

@@ -12,9 +12,9 @@
   font-family: var(--font-cofo-sans);
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  color: #ffffff40;
-  padding: 3px;
+  padding: 3px 8px;
   border: 1px solid #ffffff3d;
   border-radius: 4px;
 }
@@ -27,6 +27,10 @@
 .menu :global(.react-aria-ListBoxItem) {
   padding: 4px 16px;
   cursor: default;
+}
+
+.menu :global(.react-aria-ListBoxItem[data-focus-visible]) {
+  outline: 1px solid #005fff;
 }
 
 .menu :global(.react-aria-ListBoxItem[data-focused]) {

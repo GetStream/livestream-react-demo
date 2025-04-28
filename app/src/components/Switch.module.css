@@ -25,6 +25,11 @@
   background: #006aff;
 }
 
+._[data-focus-visible]::before {
+  outline: 1px solid #005fff;
+  outline-offset: 1px;
+}
+
 ._::after {
   content: "";
   position: absolute;

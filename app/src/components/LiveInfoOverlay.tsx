@@ -45,10 +45,13 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
           friend by sending them this URL:
         </div>
         <img
+          className={styles.qr}
           alt={joinUrl}
-          src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(
+          src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(
             joinUrl
           )}`}
+          width={90}
+          height={90}
         />
       </div>
       <hr className={styles.spacer} />

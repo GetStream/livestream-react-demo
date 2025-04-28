@@ -122,7 +122,7 @@ export function RecordingSettings() {
                 )}
               >
                 <SelectValue />
-                <Icon icon="unfold" />
+                <Icon icon="unfold" size={14} />
               </Button>
               <Popover
                 className={clsx(

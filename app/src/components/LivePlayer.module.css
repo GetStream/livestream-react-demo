@@ -16,6 +16,10 @@
   padding: 4px;
 }
 
+.overlay_placeholder {
+  position: static;
+}
+
 .nametag {
   display: flex;
   gap: 8px;

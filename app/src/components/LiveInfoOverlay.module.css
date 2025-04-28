@@ -34,3 +34,10 @@
   border: 0;
   border-bottom: 1px solid #ffffff1a;
 }
+
+.qr {
+  border: 8px solid #fff;
+  border-radius: 2px;
+  background-color: #fff;
+  box-sizing: content-box;
+}
