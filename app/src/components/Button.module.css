@@ -18,6 +18,10 @@
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
+._primary[data-pressed] {
+  background: linear-gradient(10deg, #0052cc 50%, #001d4d 75%);
+}
+
 ._primary::before,
 ._primary::after {
   content: "";
@@ -51,6 +55,14 @@
       transparent 50%
     ),
     rgba(255, 255, 255, 0.2);
+}
+
+._primary[data-pressed]::before {
+  background: #005ae0;
+}
+
+._primary[data-pressed]::after {
+  display: none;
 }
 
 ._subtle {
