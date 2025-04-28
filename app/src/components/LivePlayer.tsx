@@ -9,21 +9,25 @@ import { useHostParticipant, type ParticipantTrackFlags } from "./participants";
 export default function LivePlayer() {
   const host = useHostParticipant();
 
-  if (!host) {
-    return null;
-  }
-
   return (
     <div className={styles._}>
-      <div className={styles.video}>
-        <ParticipantView
-          participant={host}
-          trackType={host.hasScreenShare ? "screenShareTrack" : "videoTrack"}
-          ParticipantViewUI={null}
-          VideoPlaceholder={null}
-        />
-      </div>
-      <Overlay participant={host} />
+      {host ? (
+        <>
+          <div className={styles.video}>
+            <ParticipantView
+              participant={host}
+              trackType={
+                host.hasScreenShare ? "screenShareTrack" : "videoTrack"
+              }
+              ParticipantViewUI={null}
+              VideoPlaceholder={null}
+            />
+          </div>
+          <Overlay participant={host} />
+        </>
+      ) : (
+        <PlaceholderOverlay />
+      )}
     </div>
   );
 }
@@ -60,6 +64,14 @@ function Overlay(props: {
           />
         </div>
       )}
+    </div>
+  );
+}
+
+function PlaceholderOverlay() {
+  return (
+    <div className={styles.overlay_placeholder}>
+      <div className={styles.nametag}>Livestream is offline</div>
     </div>
   );
 }

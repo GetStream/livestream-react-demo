@@ -1,3 +1,4 @@
+import type { Call } from "@stream-io/video-react-sdk";
 import clsx from "clsx";
 import { Link } from "react-aria-components";
 import actionListStyles from "./ActionList.module.css";
@@ -7,15 +8,22 @@ import { FeatureList } from "./FeatureList";
 import styles from "./FinalScreen.module.css";
 import glassStyles from "./Glass.module.css";
 import { Icon } from "./Icon";
+import iconStyles from "./Icon.module.css";
+import { RecordingDownloadButton } from "./RecordingDownloadButton";
 import screenStyles from "./Screen.module.css";
+import toolbarStyles from "./Toolbar.module.css";
 
-export function FinalScreen() {
+export function FinalScreen(props: { call?: Call }) {
   return (
     <div className={clsx(screenStyles._, styles._)}>
-      <div className={clsx(screenStyles.header, styles.header)}>
-        <Link className={styles.backlink} href="/">
-          <Icon icon="replay" size={14} /> Start over
+      <div
+        className={clsx(screenStyles.header, styles.header, toolbarStyles._)}
+      >
+        <Link className={clsx(styles.backlink, iconStyles.withIcon)} href="/">
+          <Icon icon="replay" size={12} /> Start over
         </Link>
+        <i className={toolbarStyles.spacer} />
+        {props.call && <RecordingDownloadButton call={props.call} />}
       </div>
       <div className={clsx(screenStyles.main, styles.main)}>
         <div className={actionListStyles._}>

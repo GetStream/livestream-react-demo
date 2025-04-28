@@ -1,5 +1,7 @@
+import { useStore } from "@nanostores/react";
 import clsx from "clsx";
 import { useState } from "react";
+import { viewerModeStore } from "../stores/viewerMode";
 import { Backstage } from "./Backstage";
 import { BgVideo } from "./BgVideo";
 import { CallControls } from "./CallControls";
@@ -7,16 +9,15 @@ import { LiveDurationIndicator } from "./LiveDurationIndicator";
 import { LiveInfoOverlay } from "./LiveInfoOverlay";
 import LivePlayer from "./LivePlayer";
 import styles from "./LiveScreen.module.css";
+import { useSessionParticipantCount } from "./participants";
+import { PingIndicator } from "./PingIndicator";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
-import { useSessionParticipantCount } from "./participants";
-import { PingIndicator } from "./PingIndicator";
-import { useViewerMode } from "./ViewerModeContext";
 
 export function LiveScreen(props: { onCallLeft: () => void }) {
-  const mode = useViewerMode();
+  const { mode } = useStore(viewerModeStore);
   const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
   const { isLive, isLivePending, handleGoLive } = useBackstage();
   const method = useBroadcastMethod();

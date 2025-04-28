@@ -3,6 +3,7 @@
   border: 0;
   padding: 2px 4px;
   font-family: var(--font-atipla);
+  text-decoration: none;
 }
 
 ._[data-focus-visible] {
@@ -62,6 +63,62 @@
 }
 
 ._primary[data-pressed]::after {
+  display: none;
+}
+
+._positive {
+  position: relative;
+  isolation: isolate; /* introduce stacking context */
+  background: linear-gradient(170deg, #09aa7f 50%, #1b393a 75%);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  padding-inline: 6px;
+}
+
+/* ._positive[data-pressed] {
+  background: linear-gradient(10deg, #0052cc 50%, #001d4d 75%);
+} */
+
+._positive::before,
+._positive::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 3px;
+}
+
+._positive::before {
+  background: radial-gradient(
+      ellipse 150% 200% at 0% 0%,
+      rgba(105, 229, 246, 0.2) 0%,
+      rgb(0, 0, 0, 0) 40%,
+      rgba(0, 0, 0, 0) 60%,
+      rgba(105, 229, 246, 0.2) 100%
+    ),
+    linear-gradient(to bottom, #03c48d 50%, #09aa7f);
+}
+
+._positive::after {
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0),
+    linear-gradient(to right, transparent, #fff 25%, #fff 75%, transparent)
+      bottom/100% 1px no-repeat;
+  mask-composite: exclude;
+  padding: 1px;
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.6) 0%,
+      transparent 50%
+    ),
+    rgba(255, 255, 255, 0.2);
+}
+
+._positive[data-pressed]::before {
+  background: #005ae0;
+}
+
+._positive[data-pressed]::after {
   display: none;
 }
 

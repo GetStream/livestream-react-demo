@@ -1,4 +1,12 @@
+import { useStore } from "@nanostores/react";
+import {
+  type Call,
+  RecordSettingsRequestQualityEnum,
+  useCall,
+  useCallStateHooks,
+} from "@stream-io/video-react-sdk";
 import clsx from "clsx";
+import { useState } from "react";
 import {
   Button,
   Label,
@@ -9,25 +17,21 @@ import {
   SelectValue,
   Switch,
 } from "react-aria-components";
+import { recordingStateStore } from "../stores/recording";
 import buttonStyles from "./Button.module.css";
-import styles from "./RecordingSettings.module.css";
-import switchStyles from "./Switch.module.css";
 import glassStyles from "./Glass.module.css";
-import selectStyles from "./Select.module.css";
 import { Icon, Spinner } from "./Icon";
-import {
-  type Call,
-  RecordSettingsRequestQualityEnum,
-  useCall,
-  useCallStateHooks,
-} from "@stream-io/video-react-sdk";
-import { useState } from "react";
+import styles from "./RecordingSettings.module.css";
+import selectStyles from "./Select.module.css";
+import switchStyles from "./Switch.module.css";
 
 export function RecordingSettings() {
   const call = useCall();
   const { useIsCallRecordingInProgress } = useCallStateHooks();
+  const recordingState = useStore(recordingStateStore);
   const isRecording = useIsCallRecordingInProgress();
-  const [isPending, setIsPending] = useState(false);
+  const isPending =
+    recordingState === "start-pending" || recordingState === "stop-pending";
   const currentRecordingSettings = call?.state.settings?.recording;
   const [isAudioOnly, setIsAudioOnly] = useState(
     currentRecordingSettings?.audio_only ?? false
@@ -44,7 +48,7 @@ export function RecordingSettings() {
       await call.update({
         settings_override: {
           recording: {
-            mode: "available",
+            mode: "auto-on",
             audio_only: isAudioOnly,
             quality: quality as RecordSettingsRequestQualityEnum,
           },
@@ -56,19 +60,21 @@ export function RecordingSettings() {
   const handleToggleRecording = async () => {
     if (call) {
       let unsubscribe: (() => void) | undefined;
-      setIsPending(true);
+      const prevRecordingState = recordingStateStore.get();
 
       try {
         if (isRecording) {
+          recordingStateStore.set("stop-pending");
           unsubscribe = call.on("call.recording_stopped", () => {
-            setIsPending(false);
+            recordingStateStore.set("stopped");
             unsubscribe?.();
           });
           await call.stopRecording();
         } else {
+          recordingStateStore.set("start-pending");
           await applySettings(call);
           unsubscribe = call.on("call.recording_started", () => {
-            setIsPending(false);
+            recordingStateStore.set("started");
             unsubscribe?.();
           });
           await call.startRecording();
@@ -76,7 +82,7 @@ export function RecordingSettings() {
       } catch (err) {
         console.error("Could not toggle recording", err);
         unsubscribe?.();
-        setIsPending(false);
+        recordingStateStore.set(prevRecordingState);
       }
     }
   };

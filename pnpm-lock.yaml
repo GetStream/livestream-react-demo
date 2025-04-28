@@ -10,9 +10,12 @@ importers:
 
   app:
     dependencies:
+      '@nanostores/react':
+        specifier: ^1.0.0
+        version: 1.0.0(nanostores@1.0.1)(react@19.1.0)
       '@stream-io/video-react-sdk':
         specifier: ^1.14.3
-        version: 1.14.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 1.14.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -22,6 +25,9 @@ importers:
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
+      nanostores:
+        specifier: ^1.0.1
+        version: 1.0.1
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -436,6 +442,13 @@ packages:
 
   '@kurkle/color@0.3.4':
     resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+
+  '@nanostores/react@1.0.0':
+    resolution: {integrity: sha512-eDduyNy+lbQJMg6XxZ/YssQqF6b4OXMFEZMYKPJCCmBevp1lg0g+4ZRi94qGHirMtsNfAWKNwsjOhC+q1gvC+A==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^1.0.0
+      react: '>=18.0.0'
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1144,20 +1157,20 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@stream-io/video-client@1.19.3':
-    resolution: {integrity: sha512-ZRtgUzHwZUbTxMd2f2zDPBxlp/thOhkU7expgAc8ylFysRR30zRnZZrRn0QsK9LUJIc/SgtXbZKu9WEU+PJBZA==}
+  '@stream-io/video-client@1.20.0':
+    resolution: {integrity: sha512-PCnTqYTCwQIni2u4JYttharMDtuFU5Ejj/MnbqUIaDHq3QZdi+rc2RRMW2RIUHlYD/UKhx0Cq2h4xER6HrnsJw==}
 
   '@stream-io/video-filters-web@0.1.7':
     resolution: {integrity: sha512-n+RFFPqZT+kZcn1IZEARoFXqEJ9IODwVQ+4aZrew8v49qj93hNLk9/gaq9DT8TtY17Lic5bKUoW3OGp3zivR2A==}
 
-  '@stream-io/video-react-bindings@1.5.15':
-    resolution: {integrity: sha512-+lGxy01JfwfxyF6uWOjIcyi25yO5sCDqrLyKNziNP8DUr4uCCRucA/9jC/yqe8rnuouSa9ta3SLF/yv28JE+7Q==}
+  '@stream-io/video-react-bindings@1.5.16':
+    resolution: {integrity: sha512-VWhLs3HXsfTUmeZ77PV2/aIuwTUqBzFH4ZZOnKTR6RNShIZqjFT/WygSP0JBhPxMToel+PmEwoveBU1k3VALZQ==}
     peerDependencies:
-      '@stream-io/video-client': ^1.19.3
+      '@stream-io/video-client': ^1.20.0
       react: ^17 || ^18 || ^19
 
-  '@stream-io/video-react-sdk@1.14.3':
-    resolution: {integrity: sha512-oIZgGoilqT0RuYEfJxJOY2NIacgh3dM+V/XeT3ogTNVu2ScI8NEvY+Uc3TNuK9Fh4+8TNhzxD2zPbdfCKJElXg==}
+  '@stream-io/video-react-sdk@1.14.4':
+    resolution: {integrity: sha512-dgQfQN0NoFAJb64nxRehCnGm/wcf6eGjAEJf9CXrJs1QlhtDfKY7sNLwgf7qFyN8JmywmXW7YbS9zd0inGYBMw==}
     peerDependencies:
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
@@ -1267,8 +1280,8 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  axios@1.8.4:
-    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
+  axios@1.9.0:
+    resolution: {integrity: sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1684,6 +1697,10 @@ packages:
     resolution: {integrity: sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw==}
     engines: {node: ^18 || >=20}
     hasBin: true
+
+  nanostores@1.0.1:
+    resolution: {integrity: sha512-kNZ9xnoJYKg/AfxjrVL4SS0fKX++4awQReGqWnwTRHxeHGZ1FJFVgTqr/eMrNQdp0Tz7M7tG/TDaX8QfHDwVCw==}
+    engines: {node: ^20.0.0 || >=22.0.0}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -2297,6 +2314,11 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.0
 
   '@kurkle/color@0.3.4': {}
+
+  '@nanostores/react@1.0.0(nanostores@1.0.1)(react@19.1.0)':
+    dependencies:
+      nanostores: 1.0.1
+      react: 19.1.0
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -3423,12 +3445,12 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.40.0':
     optional: true
 
-  '@stream-io/video-client@1.19.3':
+  '@stream-io/video-client@1.20.0':
     dependencies:
       '@protobuf-ts/runtime': 2.9.6
       '@protobuf-ts/runtime-rpc': 2.9.6
       '@protobuf-ts/twirp-transport': 2.9.6
-      axios: 1.8.4
+      axios: 1.9.0
       rxjs: 7.8.2
       sdp-transform: 2.15.0
       ua-parser-js: 1.0.40
@@ -3440,19 +3462,19 @@ snapshots:
     dependencies:
       wasm-feature-detect: 1.8.0
 
-  '@stream-io/video-react-bindings@1.5.15(@stream-io/video-client@1.19.3)(react@19.1.0)':
+  '@stream-io/video-react-bindings@1.5.16(@stream-io/video-client@1.20.0)(react@19.1.0)':
     dependencies:
-      '@stream-io/video-client': 1.19.3
+      '@stream-io/video-client': 1.20.0
       i18next: 23.16.8
       react: 19.1.0
       rxjs: 7.8.2
 
-  '@stream-io/video-react-sdk@1.14.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@stream-io/video-react-sdk@1.14.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@floating-ui/react': 0.27.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@stream-io/video-client': 1.19.3
+      '@stream-io/video-client': 1.20.0
       '@stream-io/video-filters-web': 0.1.7
-      '@stream-io/video-react-bindings': 1.5.15(@stream-io/video-client@1.19.3)(react@19.1.0)
+      '@stream-io/video-react-bindings': 1.5.16(@stream-io/video-client@1.20.0)(react@19.1.0)
       chart.js: 4.4.9
       clsx: 2.1.1
       react: 19.1.0
@@ -3607,7 +3629,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.8.4:
+  axios@1.9.0:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
@@ -4022,6 +4044,8 @@ snapshots:
   nanoid@3.3.11: {}
 
   nanoid@5.1.5: {}
+
+  nanostores@1.0.1: {}
 
   natural-compare@1.4.0: {}
 

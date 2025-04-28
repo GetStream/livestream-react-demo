@@ -1,11 +1,12 @@
+import { useStore } from "@nanostores/react";
 import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
-import { goLive } from "../call";
 import { useState } from "react";
-import { useViewerMode } from "./ViewerModeContext";
+import { goLive } from "../call";
+import { viewerModeStore } from "../stores/viewerMode";
 
 export function useBackstage() {
   const call = useCall();
-  const mode = useViewerMode();
+  const { mode } = useStore(viewerModeStore);
   const { useIsCallLive } = useCallStateHooks();
   const isLive = useIsCallLive();
   const [isLivePending, setIsLivePending] = useState(false);

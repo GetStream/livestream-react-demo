@@ -9,6 +9,7 @@ import glassStyles from "./Glass.module.css";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { Icon } from "./Icon";
+import iconStyles from "./Icon.module.css";
 
 export function BroadcastMethodScreen(props: {
   onSelect: (method: string) => void;
@@ -19,8 +20,11 @@ export function BroadcastMethodScreen(props: {
         <div className={toolbarStyles._}>
           <span>Select broadcast method:</span>
           <i className={toolbarStyles.spacer} />
-          <Link className={styles.docs} href="https://getstream.io/video/docs/">
-            <Icon icon="docs" size={14} />
+          <Link
+            className={clsx(styles.docs, iconStyles.withIcon)}
+            href="https://getstream.io/video/docs/"
+          >
+            <Icon icon="docs" size={12} />
             Docs
           </Link>
         </div>

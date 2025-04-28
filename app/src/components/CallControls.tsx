@@ -10,11 +10,12 @@ import { Button } from "react-aria-components";
 import buttonStyles from "./Button.module.css";
 import { Icon } from "./Icon";
 import { useBroadcastMethod } from "./useBroadcastMethod";
-import { useViewerMode } from "./ViewerModeContext";
 import { MuteControl } from "./MuteControl";
+import { useStore } from "@nanostores/react";
+import { viewerModeStore } from "../stores/viewerMode";
 
 export function CallControls(props: { onAction?: (action: string) => void }) {
-  const mode = useViewerMode();
+  const { mode } = useStore(viewerModeStore);
   const method = useBroadcastMethod();
 
   return (

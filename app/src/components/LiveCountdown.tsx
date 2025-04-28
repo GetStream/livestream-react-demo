@@ -1,20 +1,21 @@
-import { Button } from "react-aria-components";
-import styles from "./LiveCountdown.module.css";
-import buttonStyles from "./Button.module.css";
-import clsx from "clsx";
+import { useStore } from "@nanostores/react";
 import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { getSecondsUntil, secondsToClock } from "./clock";
+import { Button } from "react-aria-components";
+import { viewerModeStore } from "../stores/viewerMode";
 import { useEffectEvent } from "../ui/useEffectEvent";
+import buttonStyles from "./Button.module.css";
+import { getSecondsUntil, secondsToClock } from "./clock";
 import { Spinner } from "./Icon";
+import styles from "./LiveCountdown.module.css";
 import { useSessionParticipantCount } from "./participants";
-import { useViewerMode } from "./ViewerModeContext";
 
 export function LiveCountdown(props: {
   isLivePending: boolean;
   onGoLive: () => void;
 }) {
-  const mode = useViewerMode();
+  const { mode } = useStore(viewerModeStore);
   const { useCallStartsAt } = useCallStateHooks();
   const startsAt = useCallStartsAt();
   const [totalSecondsLeft, setTotalSecondsLeft] = useState(() =>

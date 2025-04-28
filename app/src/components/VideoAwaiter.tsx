@@ -1,16 +1,17 @@
+import { useStore } from "@nanostores/react";
 import clsx from "clsx";
 import { useEffect } from "react";
+import { viewerModeStore } from "../stores/viewerMode";
 import { useEffectEvent } from "../ui/useEffectEvent";
 import { Spinner } from "./Icon";
 import { useHostParticipant, useSessionParticipantCount } from "./participants";
 import styles from "./VideoAwaiter.module.css";
-import { useViewerMode } from "./ViewerModeContext";
 
 export function VideoAwaiter(props: {
   isLivePending: boolean;
   onGoLive: () => void;
 }) {
-  const mode = useViewerMode();
+  const { mode } = useStore(viewerModeStore);
   const host = useHostParticipant();
   const handleGoLive = useEffectEvent(props.onGoLive);
   const participantCount = useSessionParticipantCount().user;

@@ -22,3 +22,9 @@
     transform: rotate(360deg);
   }
 }
+
+.withIcon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
