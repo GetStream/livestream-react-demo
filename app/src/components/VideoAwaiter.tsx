@@ -24,16 +24,13 @@ export function VideoAwaiter(props: {
 
   return (
     <div className={styles._}>
-      {mode === "host" && (
+      {mode === "host" ? (
         <>
           <div>Waiting on external software</div>
           <Spinner size={80} />
         </>
-      )}
-      {mode === "viewer" && (
-        <>
-          <div>Livestream will start soon</div>
-        </>
+      ) : (
+        <div>Livestream will start soon</div>
       )}
       <div
         className={clsx(

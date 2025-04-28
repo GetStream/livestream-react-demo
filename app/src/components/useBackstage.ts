@@ -12,7 +12,7 @@ export function useBackstage() {
   const [isLivePending, setIsLivePending] = useState(false);
 
   const handleGoLive = async () => {
-    if (mode === "viewer") {
+    if (mode !== "host") {
       return;
     }
 

@@ -16,7 +16,7 @@ import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 
-export function LiveScreen(props: { onCallLeft: () => void }) {
+export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
   const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
   const { isLive, isLivePending, handleGoLive } = useBackstage();
@@ -29,33 +29,41 @@ export function LiveScreen(props: { onCallLeft: () => void }) {
     }
 
     if (action === "call-left") {
-      props.onCallLeft();
+      props.onCallLeft?.();
     }
   };
 
   return (
-    <div className={clsx(screenStyles._, styles._)}>
-      <div
-        className={clsx(screenStyles.header, styles.header, toolbarStyles._)}
-      >
-        <div>
-          <h3 className={styles.title}>
-            {method === "rtmp" ? <>RTMP</> : <>WebRTC</>} livestream
-          </h3>
-          {isLive && participantCount > 0 && (
-            <div className={styles.subtitle}>
-              {participantCount} participants
-            </div>
+    <div
+      className={clsx(
+        screenStyles._,
+        styles._,
+        mode === "recorder" && styles._recorder
+      )}
+    >
+      {mode !== "recorder" && (
+        <div
+          className={clsx(screenStyles.header, styles.header, toolbarStyles._)}
+        >
+          <div>
+            <h3 className={styles.title}>
+              {method === "rtmp" ? <>RTMP</> : <>WebRTC</>} livestream
+            </h3>
+            {isLive && participantCount > 0 && (
+              <div className={styles.subtitle}>
+                {participantCount} participants
+              </div>
+            )}
+          </div>
+          <i className={toolbarStyles.spacer} />
+          {isLive && (
+            <>
+              <LiveDurationIndicator />
+              <PingIndicator />
+            </>
           )}
         </div>
-        <i className={toolbarStyles.spacer} />
-        {isLive && (
-          <>
-            <LiveDurationIndicator />
-            <PingIndicator />
-          </>
-        )}
-      </div>
+      )}
       <div className={clsx(screenStyles.main, styles.main)}>
         {isLive ? (
           <div className={styles.player}>
@@ -74,9 +82,11 @@ export function LiveScreen(props: { onCallLeft: () => void }) {
           </div>
         )}
       </div>
-      <div className={clsx(screenStyles.footer)}>
-        <CallControls onAction={handleAction} />
-      </div>
+      {mode !== "recorder" && (
+        <div className={clsx(screenStyles.footer)}>
+          <CallControls onAction={handleAction} />
+        </div>
+      )}
     </div>
   );
 }

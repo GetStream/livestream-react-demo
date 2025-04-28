@@ -12,6 +12,10 @@
   overflow: hidden;
 }
 
+._recorder .main {
+  border-radius: 0;
+}
+
 .backstage {
   padding: 24px;
 }
