@@ -3,6 +3,7 @@ export { default as bullet } from './bullet.svg?url';
 export { default as call_end } from './call_end.svg?url';
 export { default as close } from './close.svg?url';
 export { default as copy } from './copy.svg?url';
+export { default as docs } from './docs.svg?url';
 export { default as info } from './info.svg?url';
 export { default as inifnity } from './inifnity.svg?url';
 export { default as key } from './key.svg?url';

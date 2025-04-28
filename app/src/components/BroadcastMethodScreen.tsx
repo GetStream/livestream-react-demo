@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { Button } from "react-aria-components";
+import { Button, Link } from "react-aria-components";
 import actionListStyles from "./ActionList.module.css";
 import badgeStyles from "./Badge.module.css";
 import { BgVideo } from "./BgVideo";
@@ -8,6 +8,7 @@ import { FeatureList } from "./FeatureList";
 import glassStyles from "./Glass.module.css";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
+import { Icon } from "./Icon";
 
 export function BroadcastMethodScreen(props: {
   onSelect: (method: string) => void;
@@ -18,7 +19,10 @@ export function BroadcastMethodScreen(props: {
         <div className={toolbarStyles._}>
           <span>Select broadcast method:</span>
           <i className={toolbarStyles.spacer} />
-          {/* <span>Docs</span> */}
+          <Link className={styles.docs} href="https://getstream.io/video/docs/">
+            <Icon icon="docs" size={14} />
+            Docs
+          </Link>
         </div>
       </div>
       <div className={clsx(screenStyles.main, styles.main)}>
