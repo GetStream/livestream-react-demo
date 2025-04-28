@@ -87,6 +87,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           <CallControls onAction={handleAction} />
         </div>
       )}
+      {mode === "recorder" && <span id="egress-ready-for-capture" />}
     </div>
   );
 }
