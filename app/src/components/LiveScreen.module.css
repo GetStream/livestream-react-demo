@@ -6,14 +6,59 @@
   min-height: 40px;
 }
 
-.main {
-  border: 1px solid #ffffff1a;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
 ._recorder .main {
   border-radius: 0;
+}
+
+.workarea {
+  overflow: hidden;
+  align-self: stretch;
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffffff1a;
+  border-radius: 4px;
+}
+
+.sidebar {
+  align-self: stretch;
+  flex-basis: 300px;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.sidebar_open {
+  animation: sidebarOpen 0.2s ease-out;
+}
+
+.sidebar_closing {
+  animation: sidebarClose 0.2s linear forwards;
+}
+
+@keyframes sidebarOpen {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sidebarClose {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(16px);
+  }
 }
 
 .backstage {
@@ -38,7 +83,15 @@
     align-items: stretch;
     justify-content: start;
     gap: 8px;
+  }
+
+  .workarea {
+    display: contents;
     border: 0;
+  }
+
+  .sidebar {
+    display: none;
   }
 
   .backstage,

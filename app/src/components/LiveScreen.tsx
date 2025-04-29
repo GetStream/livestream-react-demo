@@ -16,6 +16,7 @@ import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 import { ReactionsOverlay } from "./ReactionsOverlay";
+import glassStyles from "./Glass.module.css";
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
@@ -66,23 +67,29 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
         </div>
       )}
       <div className={clsx(screenStyles.main, styles.main)}>
-        {isLive ? (
-          <div className={styles.player}>
-            <LivePlayer />
-            <BgVideo />
-          </div>
-        ) : (
-          <div className={styles.backstage}>
-            <Backstage isLivePending={isLivePending} onGoLive={handleGoLive} />
-            <BgVideo />
-          </div>
-        )}
-        {isInfoOverlayOpen && (
-          <div className={styles.overlay}>
-            <LiveInfoOverlay onClose={() => setIsInfoOverlayOpen(false)} />
-          </div>
-        )}
-        <ReactionsOverlay />
+        <div className={styles.workarea}>
+          {isLive ? (
+            <div className={styles.player}>
+              <LivePlayer />
+              <BgVideo />
+            </div>
+          ) : (
+            <div className={styles.backstage}>
+              <Backstage
+                isLivePending={isLivePending}
+                onGoLive={handleGoLive}
+              />
+              <BgVideo />
+            </div>
+          )}
+          {isInfoOverlayOpen && (
+            <div className={styles.overlay}>
+              <LiveInfoOverlay onClose={() => setIsInfoOverlayOpen(false)} />
+            </div>
+          )}
+          <ReactionsOverlay />
+        </div>
+        <Sidebar isOpen />
       </div>
       {mode !== "recorder" && (
         <div className={clsx(screenStyles.footer)}>
@@ -90,6 +97,35 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
         </div>
       )}
       {mode === "recorder" && <span id="egress-ready-for-capture" />}
+    </div>
+  );
+}
+
+function Sidebar(props: { isOpen: boolean }) {
+  const [state, setState] = useState<"closed" | "open" | "closing">("closed");
+
+  if (props.isOpen && state !== "open") {
+    setState("open");
+  } else if (!props.isOpen && state === "open") {
+    setState("closing");
+  } else if (state === "closed") {
+    return null;
+  }
+
+  return (
+    <div
+      className={clsx(
+        styles.sidebar,
+        styles[`sidebar_${state}`],
+        glassStyles._
+      )}
+      onAnimationEnd={(event) => {
+        if (event.animationName === styles.sidebarClose) {
+          setState("closed");
+        }
+      }}
+    >
+      Sidebar
     </div>
   );
 }

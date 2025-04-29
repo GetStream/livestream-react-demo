@@ -36,13 +36,6 @@ export function ReactionsOverlay() {
           };
 
           setReactions((reactions) => [...reactions, reaction]);
-          // setTimeout(() => {
-          //   if (!cancel) {
-          //     setReactions((reactions) =>
-          //       reactions.filter((r) => r !== reaction)
-          //     );
-          //   }
-          // });
         }
       });
 
