@@ -14,8 +14,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(nanostores@1.0.1)(react@19.1.0)
       '@stream-io/video-react-sdk':
-        specifier: ^1.14.3
-        version: 1.14.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^1.14.5
+        version: 1.14.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -74,8 +74,6 @@ importers:
       vite:
         specifier: ^6.3.1
         version: 6.3.2
-
-  ui: {}
 
 packages:
 
@@ -1157,20 +1155,20 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@stream-io/video-client@1.20.0':
-    resolution: {integrity: sha512-PCnTqYTCwQIni2u4JYttharMDtuFU5Ejj/MnbqUIaDHq3QZdi+rc2RRMW2RIUHlYD/UKhx0Cq2h4xER6HrnsJw==}
+  '@stream-io/video-client@1.20.1':
+    resolution: {integrity: sha512-9Xgt92xETMUVMatyV2EdfYOvoVhhj7gU3RIiOWMFy4IN+539ZrV/er8m3C/ppC1MtAnVBpPJfSlP5N41v2vPuw==}
 
   '@stream-io/video-filters-web@0.1.7':
     resolution: {integrity: sha512-n+RFFPqZT+kZcn1IZEARoFXqEJ9IODwVQ+4aZrew8v49qj93hNLk9/gaq9DT8TtY17Lic5bKUoW3OGp3zivR2A==}
 
-  '@stream-io/video-react-bindings@1.5.16':
-    resolution: {integrity: sha512-VWhLs3HXsfTUmeZ77PV2/aIuwTUqBzFH4ZZOnKTR6RNShIZqjFT/WygSP0JBhPxMToel+PmEwoveBU1k3VALZQ==}
+  '@stream-io/video-react-bindings@1.5.17':
+    resolution: {integrity: sha512-vKdSRR1Dj4U02D84brYg4+oyAwIbSTNCpLon0Nj2HIMlFqrAgPMJ95VNZ6aZmOUfTTjGTMNkRNg/GixUQtOExQ==}
     peerDependencies:
-      '@stream-io/video-client': ^1.20.0
+      '@stream-io/video-client': ^1.20.1
       react: ^17 || ^18 || ^19
 
-  '@stream-io/video-react-sdk@1.14.4':
-    resolution: {integrity: sha512-dgQfQN0NoFAJb64nxRehCnGm/wcf6eGjAEJf9CXrJs1QlhtDfKY7sNLwgf7qFyN8JmywmXW7YbS9zd0inGYBMw==}
+  '@stream-io/video-react-sdk@1.14.5':
+    resolution: {integrity: sha512-JKMVCmlpoQEce1tRZsyzUTAP3Q7LHYZohu3OA5UszpJt/ZQyetg/YHeIyfkOpcslW16tACQhzMGmR+K4nYBlXg==}
     peerDependencies:
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
@@ -3445,7 +3443,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.40.0':
     optional: true
 
-  '@stream-io/video-client@1.20.0':
+  '@stream-io/video-client@1.20.1':
     dependencies:
       '@protobuf-ts/runtime': 2.9.6
       '@protobuf-ts/runtime-rpc': 2.9.6
@@ -3462,19 +3460,19 @@ snapshots:
     dependencies:
       wasm-feature-detect: 1.8.0
 
-  '@stream-io/video-react-bindings@1.5.16(@stream-io/video-client@1.20.0)(react@19.1.0)':
+  '@stream-io/video-react-bindings@1.5.17(@stream-io/video-client@1.20.1)(react@19.1.0)':
     dependencies:
-      '@stream-io/video-client': 1.20.0
+      '@stream-io/video-client': 1.20.1
       i18next: 23.16.8
       react: 19.1.0
       rxjs: 7.8.2
 
-  '@stream-io/video-react-sdk@1.14.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@stream-io/video-react-sdk@1.14.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@floating-ui/react': 0.27.8(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@stream-io/video-client': 1.20.0
+      '@stream-io/video-client': 1.20.1
       '@stream-io/video-filters-web': 0.1.7
-      '@stream-io/video-react-bindings': 1.5.16(@stream-io/video-client@1.20.0)(react@19.1.0)
+      '@stream-io/video-react-bindings': 1.5.17(@stream-io/video-client@1.20.1)(react@19.1.0)
       chart.js: 4.4.9
       clsx: 2.1.1
       react: 19.1.0
