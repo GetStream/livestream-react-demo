@@ -40,13 +40,12 @@ export function BroadcastMethodScreen(props: {
             onPress={() => props.onSelect("webrtc")}
           >
             <span className={clsx(badgeStyles._, badgeStyles._green)}>
-              Ultra-Low Latency + Easy Setup
+              Ultra-Low Latency · Recommended
             </span>
             <h4 className={actionListStyles.header}>WebRTC</h4>
             <p className={actionListStyles.description}>
-              Select this option if you want ultra-low latency browser-based
-              streaming between peers, with no transcoding or additional
-              software needed.
+              Select this option for low-latency and highest quality between the
+              host and the viewers. Supports all platforms.
             </p>
           </Button>
           <Button

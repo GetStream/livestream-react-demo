@@ -1,22 +1,23 @@
 import { useStore } from "@nanostores/react";
 import clsx from "clsx";
-import { useState } from "react";
+import { useState, type PropsWithChildren } from "react";
 import { viewerModeStore } from "../stores/viewerMode";
 import { Backstage } from "./Backstage";
 import { BgVideo } from "./BgVideo";
 import { CallControls } from "./CallControls";
+import glassStyles from "./Glass.module.css";
 import { LiveDurationIndicator } from "./LiveDurationIndicator";
 import { LiveInfoOverlay } from "./LiveInfoOverlay";
 import LivePlayer from "./LivePlayer";
 import styles from "./LiveScreen.module.css";
+import { ParticipantList } from "./ParticipantList";
 import { useSessionParticipantCount } from "./participants";
 import { PingIndicator } from "./PingIndicator";
+import { ReactionsOverlay } from "./ReactionsOverlay";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
-import { ReactionsOverlay } from "./ReactionsOverlay";
-import glassStyles from "./Glass.module.css";
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
@@ -52,9 +53,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
               {method === "rtmp" ? <>RTMP</> : <>WebRTC</>} livestream
             </h3>
             {isLive && participantCount > 0 && (
-              <div className={styles.subtitle}>
-                {participantCount} participants
-              </div>
+              <div className={styles.subtitle}>{participantCount} viewers</div>
             )}
           </div>
           <i className={toolbarStyles.spacer} />
@@ -89,7 +88,9 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           )}
           <ReactionsOverlay />
         </div>
-        <Sidebar isOpen />
+        <Sidebar isOpen>
+          <ParticipantList />
+        </Sidebar>
       </div>
       {mode !== "recorder" && (
         <div className={clsx(screenStyles.footer)}>
@@ -101,7 +102,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
   );
 }
 
-function Sidebar(props: { isOpen: boolean }) {
+function Sidebar(props: PropsWithChildren<{ isOpen: boolean }>) {
   const [state, setState] = useState<"closed" | "open" | "closing">("closed");
 
   if (props.isOpen && state !== "open") {
@@ -125,7 +126,7 @@ function Sidebar(props: { isOpen: boolean }) {
         }
       }}
     >
-      Sidebar
+      {props.children}
     </div>
   );
 }

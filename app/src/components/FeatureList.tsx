@@ -40,8 +40,7 @@ export function FeatureList() {
         </div>
         <h4 className={styles.header}>Adaptive streaming</h4>
         <p className={styles.description}>
-          Built-in redundancy to always display the highest quality to
-          participants.
+          Built-in redundancy to always display the highest quality to viewers.
         </p>
       </div>
     </div>

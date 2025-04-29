@@ -38,7 +38,7 @@ export function VideoAwaiter(props: {
           participantCount === 0 && styles.participants_empty
         )}
       >
-        {participantCount} participants have joined early
+        {participantCount} viewers have joined early
       </div>
     </div>
   );
