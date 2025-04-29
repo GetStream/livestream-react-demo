@@ -1,7 +1,7 @@
 import { atom } from "nanostores";
 
 const params = new URLSearchParams(location.search);
-const viewCallId = params.get("view");
+const viewCallId = params.get("id");
 const recorder = params.get("rec");
 
 export const viewerModeStore = atom(

@@ -18,7 +18,7 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
     return null;
   }
 
-  const joinUrl = `${location.origin}/?view=${call.id}`;
+  const joinUrl = `${location.origin}/?id=${call.id}&type=livestream`;
 
   return (
     <div className={clsx(styles._, glassStyles._, glassStyles._overlay)}>
