@@ -3,6 +3,7 @@ import { humanId } from "human-id";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import type { RecorderState } from "./stores/recorderStore";
+import { getUserData } from "./user";
 
 export function useClient(mode: "host" | "viewer" | "recorder") {
   const [client, setClient] = useState<StreamVideoClient | undefined>(
@@ -23,7 +24,7 @@ export function useClient(mode: "host" | "viewer" | "recorder") {
         return client.connectUser(
           {
             id: credentials.userId,
-            name: mode === "host" ? "Host" : humanId({ capitalize: true }),
+            ...getUserData(mode === "host" ? "Host" : undefined),
           },
           credentials.token
         );

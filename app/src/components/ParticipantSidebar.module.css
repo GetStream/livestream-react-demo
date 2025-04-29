@@ -1,0 +1,10 @@
+._ {
+  padding: 20px 12px;
+}
+
+.title {
+  font-family: var(--font-atipla);
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}

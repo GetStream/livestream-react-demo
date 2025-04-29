@@ -24,7 +24,7 @@
 
 .sidebar {
   align-self: stretch;
-  flex-basis: 300px;
+  width: 300px;
   flex-shrink: 0;
   margin-left: 10px;
 }
@@ -67,8 +67,8 @@
 
 .overlay {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 7px;
+  right: 7px;
   width: 344px;
   max-width: calc(100% - 16px);
 }

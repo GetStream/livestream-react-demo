@@ -95,7 +95,7 @@ export function ReactionControl() {
       >
         <Icon icon="reaction" />
       </Button>
-      <Popover placement="top start" offset={16} crossOffset={-8}>
+      <Popover placement="top" offset={16}>
         <Dialog
           className={clsx(glassStyles._, glassStyles._overlay, styles.dialog)}
         >

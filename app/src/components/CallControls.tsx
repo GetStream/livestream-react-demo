@@ -29,9 +29,9 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
           <Icon icon="info" />
         </Button>
       )}
-      {mode === "viewer" && <ReactionControl />}
-      <i className={toolbarStyles.spacer} />
       {mode === "viewer" && <MuteControl />}
+      <i className={toolbarStyles.spacer} />
+      {mode === "viewer" && <ReactionControl />}
       {mode === "host" && <RecordingControl />}
       {method !== "rtmp" && mode === "host" && (
         <>

@@ -10,7 +10,7 @@ import { LiveDurationIndicator } from "./LiveDurationIndicator";
 import { LiveInfoOverlay } from "./LiveInfoOverlay";
 import LivePlayer from "./LivePlayer";
 import styles from "./LiveScreen.module.css";
-import { ParticipantList } from "./ParticipantList";
+import { ParticipantSidebar } from "./ParticipantSidebar";
 import { useSessionParticipantCount } from "./participants";
 import { PingIndicator } from "./PingIndicator";
 import { ReactionsOverlay } from "./ReactionsOverlay";
@@ -89,7 +89,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           <ReactionsOverlay />
         </div>
         <Sidebar isOpen>
-          <ParticipantList />
+          <ParticipantSidebar />
         </Sidebar>
       </div>
       {mode !== "recorder" && (
