@@ -34,7 +34,7 @@
 }
 
 .sidebar_closing {
-  animation: sidebarClose 0.2s linear forwards;
+  animation: sidebarClose 0.12s linear forwards;
 }
 
 @keyframes sidebarOpen {
@@ -57,7 +57,7 @@
 
   to {
     opacity: 0;
-    transform: translateX(16px);
+    transform: translateX(32px);
   }
 }
 

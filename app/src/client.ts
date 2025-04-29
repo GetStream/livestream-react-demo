@@ -1,5 +1,4 @@
 import { StreamVideoClient } from "@stream-io/video-react-sdk";
-import { humanId } from "human-id";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import type { RecorderState } from "./stores/recorderStore";
