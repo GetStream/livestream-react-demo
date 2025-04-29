@@ -40,7 +40,9 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
           <ScreenShareControl />
         </>
       )}
-      <EndCallControl onCallLeft={() => props.onAction?.("call-left")} />
+      {mode === "host" && (
+        <EndCallControl onCallLeft={() => props.onAction?.("call-left")} />
+      )}
       <i className={toolbarStyles.spacer} />
     </div>
   );
