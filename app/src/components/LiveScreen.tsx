@@ -15,6 +15,7 @@ import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
+import { ReactionsOverlay } from "./ReactionsOverlay";
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
@@ -81,6 +82,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
             <LiveInfoOverlay onClose={() => setIsInfoOverlayOpen(false)} />
           </div>
         )}
+        <ReactionsOverlay />
       </div>
       {mode !== "recorder" && (
         <div className={clsx(screenStyles.footer)}>

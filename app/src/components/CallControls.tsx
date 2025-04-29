@@ -13,6 +13,7 @@ import { useBroadcastMethod } from "./useBroadcastMethod";
 import { MuteControl } from "./MuteControl";
 import { useStore } from "@nanostores/react";
 import { viewerModeStore } from "../stores/viewerMode";
+import { ReactionControl } from "./ReactionControl";
 
 export function CallControls(props: { onAction?: (action: string) => void }) {
   const { mode } = useStore(viewerModeStore);
@@ -28,6 +29,7 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
           <Icon icon="info" />
         </Button>
       )}
+      {mode === "viewer" && <ReactionControl />}
       <i className={toolbarStyles.spacer} />
       {mode === "viewer" && <MuteControl />}
       {mode === "host" && <RecordingControl />}

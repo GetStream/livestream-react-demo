@@ -46,7 +46,7 @@ body {
 }
 
 #root {
-  height: 100vh;
+  height: 100dvh;
   overflow: auto;
   padding: 24px;
 }

@@ -1,0 +1,32 @@
+._ {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.reaction {
+  position: absolute;
+  left: var(--reaction-offset);
+  bottom: 0;
+  animation: float var(--reaction-duration) ease-out forwards;
+  font-size: calc(71px * var(--reaction-scale, 1));
+  font-style: normal;
+}
+
+@container (max-width: 720px) {
+  .reaction {
+    font-size: calc(39px * var(--reaction-scale, 1));
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(calc(-1 * var(--reaction-distance)));
+    opacity: 0;
+  }
+}

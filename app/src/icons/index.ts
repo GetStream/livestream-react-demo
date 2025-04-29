@@ -12,6 +12,7 @@ export { default as link } from './link.svg?url';
 export { default as mic } from './mic.svg?url';
 export { default as mic_off } from './mic_off.svg?url';
 export { default as present } from './present.svg?url';
+export { default as reaction } from './reaction.svg?url';
 export { default as recording } from './recording.svg?url';
 export { default as replay } from './replay.svg?url';
 export { default as spaceship } from './spaceship.svg?url';

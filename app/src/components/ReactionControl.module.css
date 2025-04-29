@@ -1,0 +1,25 @@
+.dialog {
+  padding: 16px;
+  user-select: none;
+}
+
+.dialog:focus-visible {
+  outline: 0;
+}
+
+.toolbar_locked {
+  visibility: hidden;
+}
+
+.reactionButton {
+  font-size: 20px;
+  padding: 5px 4px 3px;
+}
+
+.cooldown {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
