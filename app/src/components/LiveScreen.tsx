@@ -22,17 +22,24 @@ import { useBroadcastMethod } from "./useBroadcastMethod";
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
   const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { isLive, isLivePending, handleGoLive } = useBackstage();
   const method = useBroadcastMethod();
   const participantCount = useSessionParticipantCount().user;
 
   const handleAction = (action: string) => {
-    if (action === "info") {
-      setIsInfoOverlayOpen(true);
-    }
+    switch (action) {
+      case "info":
+        setIsInfoOverlayOpen(true);
+        break;
 
-    if (action === "call-left") {
-      props.onCallLeft?.();
+      case "call-left":
+        props.onCallLeft?.();
+        break;
+
+      case "participants":
+        setIsSidebarOpen(true);
+        break;
     }
   };
 
@@ -88,8 +95,8 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           )}
           <ReactionsOverlay />
         </div>
-        <Sidebar isOpen>
-          <ParticipantSidebar />
+        <Sidebar isOpen={isSidebarOpen}>
+          <ParticipantSidebar onClose={() => setIsSidebarOpen(false)} />
         </Sidebar>
       </div>
       {mode !== "recorder" && (

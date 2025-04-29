@@ -1,18 +1,13 @@
-import {
-  useCallStateHooks,
-  useStreamVideoClient,
-} from "@stream-io/video-react-sdk";
+import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import clsx from "clsx";
+import { Button } from "react-aria-components";
+import buttonStyles from "./Button.module.css";
+import { Icon } from "./Icon";
 import styles from "./ParticipantSidebar.module.css";
 import toolbarStyles from "./Toolbar.module.css";
-import buttonStyles from "./Button.module.css";
-import { Button } from "react-aria-components";
-import clsx from "clsx";
-import { Icon } from "./Icon";
-import { fallbackAvatarColor } from "../user";
 import { User } from "./User";
 
 export function ParticipantSidebar(props: { onClose: () => void }) {
-  const client = useStreamVideoClient();
   const { useCallSession } = useCallStateHooks();
   const session = useCallSession();
 

@@ -44,6 +44,12 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
         <EndCallControl onCallLeft={() => props.onAction?.("call-left")} />
       )}
       <i className={toolbarStyles.spacer} />
+      <Button
+        className={clsx(buttonStyles._, buttonStyles._subtle)}
+        onPress={() => props.onAction?.("participants")}
+      >
+        <Icon icon="people" />
+      </Button>
     </div>
   );
 }
