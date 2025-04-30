@@ -10,29 +10,35 @@ export function MuteControl() {
   const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
-    setInterval(() => {
+    function detectMuted() {
       const audio = queryStreamAudio();
       if (audio?.paused) {
         setIsMuted(true);
       }
-    }, 500);
+    }
+
+    detectMuted();
+    const handle = setInterval(detectMuted, 100);
+    return () => clearInterval(handle);
   }, []);
+
+  const handleMuteChange = (isMuted: boolean) => {
+    call?.speaker.setVolume(isMuted ? 0 : 1);
+    setIsMuted(isMuted);
+    const audio = queryStreamAudio();
+    if (audio?.paused) {
+      audio.play().catch(() => {
+        setIsMuted(true);
+        console.error("Could not play audio");
+      });
+    }
+  };
 
   return (
     <ToggleButton
       className={clsx(buttonStyles._, buttonStyles._subtle)}
       isSelected={isMuted}
-      onChange={(isMuted) => {
-        call?.speaker.setVolume(isMuted ? 0 : 1);
-        setIsMuted(isMuted);
-        const audio = queryStreamAudio();
-        if (audio?.paused) {
-          audio.play().catch(() => {
-            setIsMuted(true);
-            console.error("Could not play audio");
-          });
-        }
-      }}
+      onChange={handleMuteChange}
     >
       {<Icon icon={isMuted ? "volume_off" : "volume_up"} />}
     </ToggleButton>
