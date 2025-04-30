@@ -18,6 +18,9 @@ import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
+import { Link } from "react-aria-components";
+import { CopyableValue } from "./CopyableValue";
+import { useCall, useStreamVideoClient } from "@stream-io/video-react-sdk";
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
@@ -80,13 +83,16 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
               <BgVideo />
             </div>
           ) : (
-            <div className={styles.backstage}>
-              <Backstage
-                isLivePending={isLivePending}
-                onGoLive={handleGoLive}
-              />
-              <BgVideo />
-            </div>
+            <>
+              <div className={styles.backstage}>
+                <Backstage
+                  isLivePending={isLivePending}
+                  onGoLive={handleGoLive}
+                />
+                <BgVideo />
+              </div>
+              <Tutorial />
+            </>
           )}
           {isInfoOverlayOpen && (
             <div className={styles.overlay}>
@@ -136,4 +142,51 @@ function Sidebar(props: PropsWithChildren<{ isOpen: boolean }>) {
       {props.children}
     </div>
   );
+}
+
+function Tutorial() {
+  const client = useStreamVideoClient();
+  const call = useCall();
+  const method = useBroadcastMethod();
+
+  if (method === "rtmp") {
+    return (
+      <div className={clsx(styles.tutorial, styles.tutorial_rtmp)}>
+        <div className={styles.tutorialSteps}>
+          <h4 className={styles.tutorialTitle}>Broadcasting software setup</h4>
+          We recommend that you take a few mins to look at the tutorial on{" "}
+          <Link
+            href="https://getstream.io/video/sdk/react/tutorial/livestreaming/#step-2-setup-the-livestream-in-obs"
+            target="_top"
+          >
+            setting up OBS
+          </Link>
+          :
+          <ol>
+            <li>
+              Add the following credentials to the settings, under Stream.
+            </li>
+            <li>Start streaming.</li>
+          </ol>
+        </div>
+        <div className={styles.tutorialKeys}>
+          <CopyableValue label={<>Server URL</>} icon="link">
+            {call?.state.ingress?.rtmp.address ?? ""}
+          </CopyableValue>
+          <CopyableValue label={<>Stream Key</>} icon="link">
+            {client?.streamClient.tokenManager.getToken() ?? ""}
+          </CopyableValue>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.tutorial}>
+        <h4 className={styles.tutorialTitle}>Camera setup</h4>
+        Select your capture device from the camera dropdown.
+        <br />
+        You can also use virtual camera from your broadcasting software.
+      </div>
+    );
+  }
 }

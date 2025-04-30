@@ -37,9 +37,11 @@ export async function createCall(client: StreamVideoClient, method: string) {
     call.microphone.disableSpeakingWhileMutedNotification(),
   ];
 
-  if (method === "rtmp") {
-    callSetupPromises.push(call.camera.disable(), call.microphone.disable());
-  }
+  const defaultDeviceAction = method === "rtmp" ? "disable" : "enable";
+  callSetupPromises.push(
+    call.camera[defaultDeviceAction](),
+    call.microphone[defaultDeviceAction]()
+  );
 
   await Promise.all(callSetupPromises);
 

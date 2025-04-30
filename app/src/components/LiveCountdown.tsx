@@ -1,7 +1,7 @@
 import { useStore } from "@nanostores/react";
-import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import { useCallStateHooks, VideoPreview } from "@stream-io/video-react-sdk";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "react-aria-components";
 import { viewerModeStore } from "../stores/viewerMode";
 import { useEffectEvent } from "../ui/useEffectEvent";
@@ -16,12 +16,15 @@ export function LiveCountdown(props: {
   onGoLive: () => void;
 }) {
   const { mode } = useStore(viewerModeStore);
-  const { useCallStartsAt } = useCallStateHooks();
+  const { useCallStartsAt, useCameraState } = useCallStateHooks();
   const startsAt = useCallStartsAt();
   const [totalSecondsLeft, setTotalSecondsLeft] = useState(() =>
     getSecondsUntil(startsAt)
   );
   const participantCount = useSessionParticipantCount().user;
+  const { isEnabled: isPreviewEnabled, mediaStream: previewStream } =
+    useCameraState();
+  const PreviewSpinner = useCallback(() => <Spinner size={40} />, []);
 
   const handleGoLive = useEffectEvent(props.onGoLive);
 
@@ -64,6 +67,14 @@ export function LiveCountdown(props: {
       >
         {participantCount} viewers have joined early
       </div>
+      {isPreviewEnabled && (
+        <div className={styles.preview}>
+          <VideoPreview StartingCameraPreview={PreviewSpinner} />
+          {previewStream && (
+            <span className={styles.previewLabel}>Camera preview</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
