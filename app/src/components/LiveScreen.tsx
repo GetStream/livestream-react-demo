@@ -91,7 +91,7 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
                 />
                 <BgVideo />
               </div>
-              <Tutorial />
+              {mode === "host" && <Tutorial />}
             </>
           )}
           {isInfoOverlayOpen && (
