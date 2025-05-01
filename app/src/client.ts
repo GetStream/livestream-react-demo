@@ -23,7 +23,7 @@ export function useClient(mode: "host" | "viewer" | "recorder") {
         return client.connectUser(
           {
             id: credentials.userId,
-            ...getUserData(mode === "host" ? "Host" : undefined),
+            ...getUserData(mode),
           },
           credentials.token
         );

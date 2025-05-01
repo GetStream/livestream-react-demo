@@ -62,7 +62,7 @@ export function BroadcastMethodScreen(props: {
             <h4 className={actionListStyles.header}>RTMP</h4>
             <p className={actionListStyles.description}>
               Select this option if you want to use dedicated software (like
-              OBS) with the highest quality video (small delay for buffering).
+              OBS) with only a small delay for buffering added to the broadcast.
             </p>
           </Button>
         </div>

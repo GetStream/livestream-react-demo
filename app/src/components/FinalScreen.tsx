@@ -34,16 +34,15 @@ export function FinalScreen(props: { call?: Call }) {
               glassStyles._,
               glassStyles._interactive
             )}
-            href="https://getstream.io/try-for-free/"
+            href="https://getstream.io/video/sdk/"
             target="_top"
           >
             <span className={clsx(badgeStyles._, badgeStyles._blue)}>
               Get Started
             </span>
-            <h4 className={actionListStyles.header}>Create a free account</h4>
+            <h4 className={actionListStyles.header}>Livestream SDKs</h4>
             <p className={actionListStyles.description}>
-              We hope you enjoyed the livestream experience. Get started for
-              free.
+              Explore all the SDKs across different platforms
             </p>
           </Link>
           <Link
@@ -53,7 +52,7 @@ export function FinalScreen(props: { call?: Call }) {
               glassStyles._,
               glassStyles._interactive
             )}
-            href="https://getstream.io/video/livestreaming/"
+            href="https://getstream.io/video/sdk/react/tutorial/livestreaming/"
             target="_top"
           >
             <span className={clsx(badgeStyles._, badgeStyles._purple)}>
@@ -71,7 +70,7 @@ export function FinalScreen(props: { call?: Call }) {
               glassStyles._,
               glassStyles._interactive
             )}
-            href="https://getstream.io/video/livestreaming/"
+            href="https://getstream.io/video/pricing/"
             target="_top"
           >
             <span className={clsx(badgeStyles._, badgeStyles._green)}>

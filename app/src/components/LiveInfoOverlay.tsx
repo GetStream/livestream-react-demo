@@ -21,7 +21,7 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
   return (
     <div className={clsx(styles._, glassStyles._, glassStyles._overlay)}>
       <div className={toolbarStyles._}>
-        <h4 className={styles.title}>Success</h4>
+        <h4 className={styles.title}>Join as viewer</h4>
         <i className={toolbarStyles.spacer} />
         <Button
           className={clsx(buttonStyles._, buttonStyles._subtle)}
@@ -38,7 +38,11 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
         {joinUrl}
       </CopyableValue>
       <div className={toolbarStyles._}>
-        <div>Or, scan the QR code to&nbsp;join from a mobile device:</div>
+        <div>
+          Want to join from your mobile phone and test our native SDKS? Scan the
+          QR code to join as a viewer.
+        </div>
+        <i className={toolbarStyles.spacer} />
         <img
           className={styles.qr}
           alt={joinUrl}

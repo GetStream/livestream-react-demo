@@ -78,41 +78,7 @@
   bottom: 40px;
   left: 0;
   right: 0;
-  text-align: center;
   padding: 24px;
-  font-family: var(--font-cofo-sans);
-}
-
-.tutorial ol {
-  margin: 0;
-  padding-left: 16px;
-}
-
-.tutorial_rtmp {
-  display: flex;
-  text-align: left;
-  justify-content: center;
-  gap: 40px;
-}
-
-.tutorialTitle {
-  font-family: var(--font-atipla);
-  font-size: 18px;
-  font-weight: 400;
-  margin: 0 0 8px;
-}
-
-.tutorialSteps {
-  flex-grow: 1;
-  max-width: 500px;
-}
-
-.tutorialKeys {
-  flex-grow: 1;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 @container (max-width: 720px) {
@@ -146,20 +112,6 @@
     overflow: hidden;
   }
 
-  .tutorial {
-    position: static;
-  }
-
-  .tutorial_rtmp {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .tutorialSteps,
-  .tutorialKeys {
-    max-width: none;
-  }
-
   .player {
     min-height: 400px;
   }
@@ -168,6 +120,12 @@
     position: static;
     width: auto;
     max-width: none;
+    order: -2;
+  }
+
+  .tutorial {
+    position: static;
+    flex-grow: 0;
     order: -1;
   }
 

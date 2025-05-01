@@ -20,8 +20,8 @@ export function FeatureList() {
         </div>
         <h4 className={styles.header}>Broadcast anywhere</h4>
         <p className={styles.description}>
-          Multi-platform streaming with any app using RTMP URLs and keys.
-          Broadcast everywhere.
+          Multi-platform streaming to YouTube, Twitch or any platform that
+          supports RTMP.
         </p>
       </div>
       <div className={styles.feature}>

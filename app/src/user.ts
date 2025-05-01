@@ -11,18 +11,20 @@ export const avatarColors = [
 
 export const fallbackAvatarColor = "#5E676E";
 
-export function getUserData(name?: string) {
+export function getUserData(mode: "host" | "viewer" | "recorder") {
   return {
     name:
-      name ??
-      humanId({ capitalize: true, separator: " " })
-        .split(" ")
-        .slice(0, 2)
-        .join(" "),
+      mode === "host"
+        ? "Host"
+        : humanId({ capitalize: true, separator: " " })
+            .split(" ")
+            .slice(0, 2)
+            .join(" "),
     custom: {
       color:
         avatarColors[Math.floor(Math.random() * avatarColors.length)] ??
         fallbackAvatarColor,
+      host: mode === "host",
     },
   };
 }
