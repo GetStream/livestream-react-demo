@@ -39,7 +39,7 @@ export function LiveInfoOverlay(props: { onClose?: () => void }) {
       </CopyableValue>
       <div className={toolbarStyles._}>
         <div>
-          Want to join from your mobile phone and test our native SDKS? Scan the
+          Want to join from your mobile phone and test our native SDKs? Scan the
           QR code to join as a viewer.
         </div>
         <i className={toolbarStyles.spacer} />
