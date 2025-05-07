@@ -13,15 +13,9 @@
   margin: 0;
 }
 
-.list {
-  padding: 0 12px 20px;
-  margin: 0 -12px -20px;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.chat {
   flex-grow: 1;
-  flex-basis: 0;
   min-height: 0;
-  overflow: auto;
+  flex-basis: 0;
+  margin: 0 -12px -20px;
 }

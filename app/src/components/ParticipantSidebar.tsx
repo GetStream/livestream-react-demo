@@ -23,12 +23,14 @@ export function ParticipantSidebar(props: { onClose: () => void }) {
           <Icon icon="close" />
         </Button>
       </div>
-      <ul>
-        {session?.participants.map((p) => (
-          <li key={p.user_session_id}>
-            <User user={p.user} />
-          </li>
-        ))}
+      <ul className={styles.list}>
+        {session?.participants
+          .filter((p) => !p.user.custom.host)
+          .map((p) => (
+            <li key={p.user_session_id}>
+              <User user={p.user} />
+            </li>
+          ))}
       </ul>
     </div>
   );

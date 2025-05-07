@@ -5,8 +5,11 @@
 
 .avatar {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: var(--str-chat__avatar-size, 40px);
+  height: var(--str-chat__avatar-size, 40px);
+  font-size: min(calc(var(--str-chat__avatar-size, 40px) * 0.5), 1em);
+  color: #fff;
+  margin-right: 8px;
   border-radius: 20px;
   background-color: var(--user-avatar-color);
   display: flex;

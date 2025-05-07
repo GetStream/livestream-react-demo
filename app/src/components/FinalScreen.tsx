@@ -12,8 +12,12 @@ import iconStyles from "./Icon.module.css";
 import { RecordingDownloadButton } from "./RecordingDownloadButton";
 import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
+import { useStore } from "@nanostores/react";
+import { viewerModeStore } from "../stores/viewerMode";
 
 export function FinalScreen(props: { call?: Call }) {
+  const { mode } = useStore(viewerModeStore);
+
   return (
     <div className={clsx(screenStyles._, styles._)}>
       <div
@@ -23,7 +27,9 @@ export function FinalScreen(props: { call?: Call }) {
           <Icon icon="replay" size={12} /> Start over
         </Link>
         <i className={toolbarStyles.spacer} />
-        {props.call && <RecordingDownloadButton call={props.call} />}
+        {props.call && mode === "host" && (
+          <RecordingDownloadButton call={props.call} />
+        )}
       </div>
       <div className={clsx(screenStyles.main, styles.main)}>
         <div className={actionListStyles._}>

@@ -50,6 +50,12 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
       >
         <Icon icon="people" />
       </Button>
+      <Button
+        className={clsx(buttonStyles._, buttonStyles._subtle)}
+        onPress={() => props.onAction?.("chat")}
+      >
+        <Icon icon="chat" />
+      </Button>
     </div>
   );
 }

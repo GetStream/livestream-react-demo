@@ -1,12 +1,13 @@
+import { useStore } from "@nanostores/react";
 import { type Call, StreamCall, StreamVideo } from "@stream-io/video-react-sdk";
 import { useState } from "react";
-import { BroadcastMethodScreen } from "./components/BroadcastMethodScreen";
-import { LiveScreen } from "./components/LiveScreen";
-import { useClient } from "./client";
 import { createCall, useCallEnded, useGetCall } from "./call";
-import { LoadingScreen } from "./components/LoadingScreen";
+import { useClient } from "./client";
+import { BroadcastMethodScreen } from "./components/BroadcastMethodScreen";
 import { FinalScreen } from "./components/FinalScreen";
-import { useStore } from "@nanostores/react";
+import { LiveScreen } from "./components/LiveScreen";
+import { LoadingScreen } from "./components/LoadingScreen";
+import { RecorderPlaceholderScreen } from "./components/RecorderPlaceholderScreen";
 import { viewerModeStore } from "./stores/viewerMode";
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
 
   if (mode === "viewer" && !viewCall) {
     return <LoadingScreen />;
+  }
+
+  if (mode === "recorder" && !viewCall) {
+    return <RecorderPlaceholderScreen />;
   }
 
   if (mode === "host" && !hostCall) {

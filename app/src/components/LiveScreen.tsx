@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/react";
 import clsx from "clsx";
-import { useState, type PropsWithChildren } from "react";
+import { Suspense, useState, type PropsWithChildren } from "react";
 import { viewerModeStore } from "../stores/viewerMode";
 import { Backstage } from "./Backstage";
 import { BgVideo } from "./BgVideo";
@@ -19,11 +19,15 @@ import toolbarStyles from "./Toolbar.module.css";
 import { Tutorial } from "./Tutorial";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
+import { ChatSidebar } from "./ChatSidebar";
+import { Spinner } from "./Icon";
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
   const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [sidebarMode, setSidebarMode] = useState<
+    "participants" | "chat" | "hidden"
+  >("hidden");
   const { isLive, isLivePending, handleGoLive } = useBackstage();
   const method = useBroadcastMethod();
   const participantCount = useSessionParticipantCount().user;
@@ -39,7 +43,8 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
         break;
 
       case "participants":
-        setIsSidebarOpen(true);
+      case "chat":
+        setSidebarMode(action);
         break;
     }
   };
@@ -103,8 +108,12 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           )}
           <ReactionsOverlay />
         </div>
-        <Sidebar isOpen={isSidebarOpen}>
-          <ParticipantSidebar onClose={() => setIsSidebarOpen(false)} />
+        <Sidebar isOpen={sidebarMode !== "hidden"}>
+          {sidebarMode === "participants" ? (
+            <ParticipantSidebar onClose={() => setSidebarMode("hidden")} />
+          ) : sidebarMode === "chat" ? (
+            <ChatSidebar onClose={() => setSidebarMode("hidden")} />
+          ) : null}
         </Sidebar>
       </div>
       {mode !== "recorder" && (

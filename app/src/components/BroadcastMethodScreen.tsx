@@ -10,10 +10,22 @@ import screenStyles from "./Screen.module.css";
 import toolbarStyles from "./Toolbar.module.css";
 import { Icon } from "./Icon";
 import iconStyles from "./Icon.module.css";
+import { useState } from "react";
 
 export function BroadcastMethodScreen(props: {
-  onSelect: (method: string) => void;
+  onSelect: (method: string) => Promise<void>;
 }) {
+  const [isPending, setIsPending] = useState(false);
+
+  const handleSelect = async (method: string) => {
+    try {
+      setIsPending(true);
+      await props.onSelect(method);
+    } finally {
+      setIsPending(false);
+    }
+  };
+
   return (
     <div className={clsx(screenStyles._, styles._)}>
       <div className={clsx(screenStyles.header, styles.header)}>
@@ -34,10 +46,12 @@ export function BroadcastMethodScreen(props: {
           <Button
             className={clsx(
               actionListStyles.action,
+              isPending && actionListStyles.action_pending,
               glassStyles._,
               glassStyles._interactive
             )}
-            onPress={() => props.onSelect("webrtc")}
+            isPending={isPending}
+            onPress={() => handleSelect("webrtc")}
           >
             <span className={clsx(badgeStyles._, badgeStyles._green)}>
               Ultra-Low Latency · Recommended
@@ -51,10 +65,12 @@ export function BroadcastMethodScreen(props: {
           <Button
             className={clsx(
               actionListStyles.action,
+              isPending && actionListStyles.action_pending,
               glassStyles._,
               glassStyles._interactive
             )}
-            onPress={() => props.onSelect("rtmp")}
+            isPending={isPending}
+            onPress={() => handleSelect("rtmp")}
           >
             <span className={clsx(badgeStyles._, badgeStyles._yellow)}>
               Slower + More Setup

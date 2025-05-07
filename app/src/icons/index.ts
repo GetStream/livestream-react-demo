@@ -2,6 +2,7 @@ export { default as arrow_down } from './arrow_down.svg?url';
 export { default as arrow_drop_up } from './arrow_drop_up.svg?url';
 export { default as bullet } from './bullet.svg?url';
 export { default as call_end } from './call_end.svg?url';
+export { default as chat } from './chat.svg?url';
 export { default as close } from './close.svg?url';
 export { default as copy } from './copy.svg?url';
 export { default as docs } from './docs.svg?url';

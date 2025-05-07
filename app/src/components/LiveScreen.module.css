@@ -27,6 +27,8 @@
   width: 300px;
   flex-shrink: 0;
   margin-left: 10px;
+  overflow: hidden;
+  transform-origin: 100% 50%;
 }
 
 .sidebar_open {
@@ -34,13 +36,13 @@
 }
 
 .sidebar_closing {
-  animation: sidebarClose 0.12s linear forwards;
+  animation: sidebarClose 0.1s linear forwards;
 }
 
 @keyframes sidebarOpen {
   from {
     opacity: 0;
-    transform: translateX(16px);
+    transform: translateX(16px) scaleX(0.98);
   }
 
   to {
@@ -57,7 +59,7 @@
 
   to {
     opacity: 0;
-    transform: translateX(32px);
+    transform: translateX(32px) scaleX(0.98);
   }
 }
 
