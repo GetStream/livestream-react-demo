@@ -1,4 +1,5 @@
 import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import type { ReactNode } from "react";
 import {
   DeviceToggleButton,
   type DeviceToggleButtonProps,
@@ -10,7 +11,7 @@ export type CameraToggleButtonProps = Omit<
   "deviceKey" | "deviceState"
 >;
 
-export function CameraToggleButton(props: CameraToggleButtonProps) {
+export function CameraToggleButton(props: CameraToggleButtonProps): ReactNode {
   const { useCameraState } = useCallStateHooks();
   return (
     <DeviceToggleButton

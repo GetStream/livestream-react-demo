@@ -1,4 +1,5 @@
 import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import type { ReactNode } from "react";
 import {
   DeviceToggleButton,
   type DeviceToggleButtonProps,
@@ -10,7 +11,9 @@ export type ScreenShareToggleButtonProps = Omit<
   "deviceKey" | "deviceState"
 >;
 
-export function ScreenShareToggleButton(props: ScreenShareToggleButtonProps) {
+export function ScreenShareToggleButton(
+  props: ScreenShareToggleButtonProps
+): ReactNode {
   const { useScreenShareState } = useCallStateHooks();
   return (
     <DeviceToggleButton

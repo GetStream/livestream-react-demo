@@ -3,9 +3,9 @@ import {
   type Call,
   type StreamVideoClient,
 } from "@stream-io/video-react-sdk";
+import { useEffectEvent } from "@stream-io/video-react-ui/utils";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { useEffectEvent } from "./ui/useEffectEvent";
 
 const backstageSeconds = 3 * 60; // 3 minutes
 

@@ -1,8 +1,8 @@
 import { useStore } from "@nanostores/react";
+import { useEffectEvent } from "@stream-io/video-react-ui/utils";
 import clsx from "clsx";
 import { useEffect } from "react";
 import { viewerModeStore } from "../stores/viewerMode";
-import { useEffectEvent } from "../ui/useEffectEvent";
 import { Spinner } from "./Icon";
 import { useHostParticipant, useSessionParticipantCount } from "./participants";
 import styles from "./VideoAwaiter.module.css";

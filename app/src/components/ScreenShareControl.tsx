@@ -1,9 +1,11 @@
+import { CallingState, useCallStateHooks } from "@stream-io/video-react-sdk";
+import {
+  ScreenShareToggleButton,
+  WithDeviceToggleState,
+} from "@stream-io/video-react-ui";
 import clsx from "clsx";
-import { ScreenShareToggleButton } from "../ui/ScreenShareToggleButton";
 import buttonStyles from "./Button.module.css";
 import { Icon, Spinner } from "./Icon";
-import { WithDeviceToggleState } from "../ui/WithDeviceToggleState";
-import { CallingState, useCallStateHooks } from "@stream-io/video-react-sdk";
 
 export function ScreenShareControl() {
   const { useCallCallingState } = useCallStateHooks();

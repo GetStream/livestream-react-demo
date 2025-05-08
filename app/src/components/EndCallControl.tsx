@@ -1,5 +1,8 @@
+import {
+  EndCallButton,
+  type EndCallButtonProps,
+} from "@stream-io/video-react-ui";
 import clsx from "clsx";
-import { EndCallButton, type EndCallButtonProps } from "../ui/EndCallButton";
 import buttonStyles from "./Button.module.css";
 import { Icon, Spinner } from "./Icon";
 import { mergeProps } from "react-aria";

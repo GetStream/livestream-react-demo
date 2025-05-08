@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { mergeProps } from "react-aria";
 import { ToggleButton, type ToggleButtonProps } from "react-aria-components";
 import type { DeviceKey, DeviceState } from "./devices";
@@ -15,7 +16,7 @@ export type DeviceToggleButtonProps<K extends DeviceKey> = {
 
 export function DeviceToggleButton<K extends DeviceKey>(
   props: DeviceToggleButtonProps<K>
-) {
+): ReactNode {
   const { deviceKey, deviceState, onError, ...toggleButtonProps } = props;
   const { props: providedProps, state } = useDeviceToggleButton(props);
   const mergedProps = mergeProps(toggleButtonProps, providedProps);

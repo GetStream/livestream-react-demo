@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useEffectEvent } from "./useEffectEvent";
 import { useCall } from "@stream-io/video-react-sdk";
 
-export function useCallEnded(cb: (() => void) | undefined) {
+export function useCallEnded(cb: (() => void) | undefined): void {
   const call = useCall();
   const handleCallEnded = useEffectEvent(cb);
 

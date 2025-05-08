@@ -1,4 +1,5 @@
 import { useCallStateHooks } from "@stream-io/video-react-sdk";
+import type { ReactNode } from "react";
 import {
   DeviceToggleButton,
   type DeviceToggleButtonProps,
@@ -10,7 +11,9 @@ export type MicrophoneToggleButtonProps = Omit<
   "deviceKey" | "deviceState"
 >;
 
-export function MicrophoneToggleButton(props: MicrophoneToggleButtonProps) {
+export function MicrophoneToggleButton(
+  props: MicrophoneToggleButtonProps
+): ReactNode {
   const { useMicrophoneState } = useCallStateHooks();
   return (
     <DeviceToggleButton

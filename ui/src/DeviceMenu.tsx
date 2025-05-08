@@ -1,4 +1,5 @@
 import { useDeviceList } from "@stream-io/video-react-sdk";
+import type { ReactNode } from "react";
 import { mergeProps } from "react-aria";
 import {
   Menu,
@@ -15,7 +16,9 @@ export type DeviceMenuProps<K extends DeviceKey> = {
   onError?: (reason: unknown) => void;
 } & Omit<MenuProps<DeviceListItem>, "items" | "children">;
 
-export function DeviceMenu<K extends DeviceKey>(props: DeviceMenuProps<K>) {
+export function DeviceMenu<K extends DeviceKey>(
+  props: DeviceMenuProps<K>
+): ReactNode {
   const { deviceKey, deviceState, onError, ...menuProps } = props;
   const mergedProps = mergeProps(menuProps, useDeviceMenu(props).props);
   return <Menu {...mergedProps} />;

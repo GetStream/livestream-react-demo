@@ -8,7 +8,9 @@ export interface WithDeviceToggleStateProps {
   children: (state: DeviceToggleState) => ReactNode;
 }
 
-export function WithDeviceToggleState(props: WithDeviceToggleStateProps) {
+export function WithDeviceToggleState(
+  props: WithDeviceToggleStateProps
+): ReactNode {
   const state = useContext(DeviceToggleStateContext);
   return props.children(state);
 }

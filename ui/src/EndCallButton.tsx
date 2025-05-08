@@ -1,15 +1,15 @@
+import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
+import { useState, type ReactNode } from "react";
 import { mergeProps } from "react-aria";
 import { Button, type ButtonProps } from "react-aria-components";
 import { useEffectEvent } from "./useEffectEvent";
-import { useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
-import { useState } from "react";
 
 export type EndCallButtonProps = {
   onCallLeft?: () => void;
   onError?: (reason: unknown) => void;
 } & Omit<ButtonProps, "isPending">;
 
-export function EndCallButton(props: EndCallButtonProps) {
+export function EndCallButton(props: EndCallButtonProps): ReactNode {
   const { onError, ...buttonProps } = props;
   const { props: providedProps } = useEndCallButton(props);
   const mergedProps = mergeProps(buttonProps, providedProps);

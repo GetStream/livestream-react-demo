@@ -1,2 +1,13 @@
 packages:
   - app
+  - ui
+
+catalog:
+  "@stream-io/video-react-sdk": ^1.14.5
+  "@types/react": ^19.0.0
+  "@types/react-dom": ^19.0.0
+  react: ^19.0.0
+  react-aria: ^3.39.0
+  react-aria-components: ^1.8.0
+  react-dom: ^19.0.0
+  typescript: ^5.8.0

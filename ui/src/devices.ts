@@ -5,9 +5,11 @@ import type {
 
 export type DeviceKey = "microphone" | "camera" | "screenShare";
 
-export const microphoneDeviceKey = "microphone" satisfies DeviceKey;
-export const cameraDeviceKey = "camera" satisfies DeviceKey;
-export const screenShareDeviceKey = "screenShare" satisfies DeviceKey;
+export const microphoneDeviceKey: "microphone" =
+  "microphone" satisfies DeviceKey;
+export const cameraDeviceKey: "camera" = "camera" satisfies DeviceKey;
+export const screenShareDeviceKey: "screenShare" =
+  "screenShare" satisfies DeviceKey;
 
 export type DeviceState<K extends DeviceKey> = {
   [ManagerKey in K]: DeviceManagerLike;

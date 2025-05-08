@@ -1,10 +1,10 @@
 import { useStore } from "@nanostores/react";
 import { useCallStateHooks, VideoPreview } from "@stream-io/video-react-sdk";
+import { useEffectEvent } from "@stream-io/video-react-ui/utils";
 import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "react-aria-components";
 import { viewerModeStore } from "../stores/viewerMode";
-import { useEffectEvent } from "../ui/useEffectEvent";
 import buttonStyles from "./Button.module.css";
 import { getSecondsUntil, secondsToClock } from "./clock";
 import { Spinner } from "./Icon";

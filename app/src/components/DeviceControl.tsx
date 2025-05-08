@@ -1,10 +1,12 @@
+import {
+  CameraMenu,
+  CameraToggleButton,
+  MicrophoneMenu,
+  MicrophoneToggleButton,
+} from "@stream-io/video-react-ui";
 import clsx from "clsx";
 import type { PropsWithChildren } from "react";
 import { Button, Group, MenuTrigger, Popover } from "react-aria-components";
-import { CameraMenu } from "../ui/CameraMenu";
-import { CameraToggleButton } from "../ui/CameraToggleButton";
-import { MicrophoneMenu } from "../ui/MicrophoneMenu";
-import { MicrophoneToggleButton } from "../ui/MicrophoneToggleButton";
 import buttonStyles from "./Button.module.css";
 import styles from "./DeviceControl.module.css";
 import glassStyles from "./Glass.module.css";
