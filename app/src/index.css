@@ -65,3 +65,7 @@ a[data-focus-visible] {
   outline: 1px solid #005fff;
   outline-offset: 1px;
 }
+
+div.str-chat {
+  --str-chat__font-family: var(--font-cofo-sans);
+}

@@ -8,14 +8,25 @@ import toolbarStyles from "./Toolbar.module.css";
 import { EndCallControl } from "./EndCallControl";
 import { Button } from "react-aria-components";
 import buttonStyles from "./Button.module.css";
-import { Icon } from "./Icon";
+import { Icon, Spinner } from "./Icon";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 import { MuteControl } from "./MuteControl";
 import { useStore } from "@nanostores/react";
 import { viewerModeStore } from "../stores/viewerMode";
 import { ReactionControl } from "./ReactionControl";
+import type { StreamChat } from "stream-chat";
+import { lazy, Suspense } from "react";
 
-export function CallControls(props: { onAction?: (action: string) => void }) {
+const ChatControlLazy = lazy(() => import("./ChatControl"));
+
+export function CallControls(props: {
+  isInfoOverlayOpen: boolean;
+  sidebarMode: string;
+  onInfoPress: () => void;
+  onCallLeftPress: () => void;
+  onParticipantsPress: () => void;
+  onChatPress: (client: StreamChat) => void;
+}) {
   const { mode } = useStore(viewerModeStore);
   const method = useBroadcastMethod();
 
@@ -24,7 +35,7 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
       {mode === "host" && (
         <Button
           className={clsx(buttonStyles._, buttonStyles._subtle)}
-          onPress={() => props.onAction?.("info")}
+          onPress={() => props.onInfoPress()}
         >
           <Icon icon="info" />
         </Button>
@@ -41,21 +52,18 @@ export function CallControls(props: { onAction?: (action: string) => void }) {
         </>
       )}
       {mode === "host" && (
-        <EndCallControl onCallLeft={() => props.onAction?.("call-left")} />
+        <EndCallControl onCallLeft={() => props.onCallLeftPress()} />
       )}
       <i className={toolbarStyles.spacer} />
       <Button
         className={clsx(buttonStyles._, buttonStyles._subtle)}
-        onPress={() => props.onAction?.("participants")}
+        onPress={() => props.onParticipantsPress()}
       >
         <Icon icon="people" />
       </Button>
-      <Button
-        className={clsx(buttonStyles._, buttonStyles._subtle)}
-        onPress={() => props.onAction?.("chat")}
-      >
-        <Icon icon="chat" />
-      </Button>
+      <Suspense fallback={<Spinner />}>
+        <ChatControlLazy onPress={(client) => props.onChatPress(client)} />
+      </Suspense>
     </div>
   );
 }

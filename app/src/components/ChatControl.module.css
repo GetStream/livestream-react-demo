@@ -1,0 +1,17 @@
+._ {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  background: #00e2a1;
+  color: #000;
+  width: 12px;
+  height: 12px;
+  line-height: 12px;
+  font-size: 8px;
+  border-radius: 6px;
+  margin-left: -12px;
+}

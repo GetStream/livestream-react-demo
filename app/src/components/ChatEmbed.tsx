@@ -1,6 +1,6 @@
-import { useCall } from "@stream-io/video-react-sdk";
 import clsx from "clsx";
 import type { CSSProperties } from "react";
+import type { StreamChat } from "stream-chat";
 import {
   Channel,
   Chat,
@@ -11,23 +11,16 @@ import {
   type LoadingErrorIndicatorProps,
 } from "stream-chat-react";
 import "stream-chat-react/css/v2/index.css";
-import { useChatClient } from "../chat";
+import { useChannel } from "../chat";
 import { fallbackAvatarColor, initialsFromName } from "../user";
 import { Spinner } from "./Icon";
 import userStyles from "./User.module.css";
 
-export default function ChatEmbed() {
-  const client = useChatClient();
-  const callId = useCall()?.id;
-
-  if (!client || !callId) {
-    return null;
-  }
-
-  const channel = client.channel("videocall", callId);
+export default function ChatEmbed(props: { client: StreamChat }) {
+  const channel = useChannel(props.client);
 
   return (
-    <Chat client={client} theme="str-chat__theme-dark">
+    <Chat client={props.client} theme="str-chat__theme-dark">
       <Channel
         channel={channel}
         LoadingIndicator={LoadingIndicator}

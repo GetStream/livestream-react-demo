@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/react";
 import clsx from "clsx";
-import { Suspense, useState, type PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 import { viewerModeStore } from "../stores/viewerMode";
 import { Backstage } from "./Backstage";
 import { BgVideo } from "./BgVideo";
@@ -20,34 +20,35 @@ import { Tutorial } from "./Tutorial";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 import { ChatSidebar } from "./ChatSidebar";
-import { Spinner } from "./Icon";
+import type { StreamChat } from "stream-chat";
+
+type SidebarMode =
+  | { mode: "hidden" }
+  | { mode: "participants" }
+  | { mode: "chat"; client: StreamChat };
 
 export function LiveScreen(props: { onCallLeft?: () => void }) {
   const { mode } = useStore(viewerModeStore);
   const [isInfoOverlayOpen, setIsInfoOverlayOpen] = useState(mode === "host");
-  const [sidebarMode, setSidebarMode] = useState<
-    "participants" | "chat" | "hidden"
-  >("hidden");
+  const [sidebarMode, setSidebarMode] = useState<SidebarMode>({
+    mode: "hidden",
+  });
   const { isLive, isLivePending, handleGoLive } = useBackstage();
   const method = useBroadcastMethod();
   const participantCount = useSessionParticipantCount().user;
 
-  const handleAction = (action: string) => {
-    switch (action) {
-      case "info":
-        setIsInfoOverlayOpen(true);
-        break;
+  const handleInfoPress = () => setIsInfoOverlayOpen(true);
+  const handleCallLeftPress = () => props.onCallLeft?.();
 
-      case "call-left":
-        props.onCallLeft?.();
-        break;
+  const handleParticipantsPress = () =>
+    setSidebarMode(({ mode }) =>
+      mode === "participants" ? { mode: "hidden" } : { mode: "participants" }
+    );
 
-      case "participants":
-      case "chat":
-        setSidebarMode(action);
-        break;
-    }
-  };
+  const handleChatPress = (client: StreamChat) =>
+    setSidebarMode(({ mode }) =>
+      mode === "chat" ? { mode: "hidden" } : { mode: "chat", client }
+    );
 
   return (
     <div
@@ -108,17 +109,29 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
           )}
           <ReactionsOverlay />
         </div>
-        <Sidebar isOpen={sidebarMode !== "hidden"}>
-          {sidebarMode === "participants" ? (
-            <ParticipantSidebar onClose={() => setSidebarMode("hidden")} />
-          ) : sidebarMode === "chat" ? (
-            <ChatSidebar onClose={() => setSidebarMode("hidden")} />
+        <Sidebar isOpen={sidebarMode.mode !== "hidden"}>
+          {sidebarMode.mode === "participants" ? (
+            <ParticipantSidebar
+              onClose={() => setSidebarMode({ mode: "hidden" })}
+            />
+          ) : sidebarMode.mode === "chat" ? (
+            <ChatSidebar
+              client={sidebarMode.client}
+              onClose={() => setSidebarMode({ mode: "hidden" })}
+            />
           ) : null}
         </Sidebar>
       </div>
       {mode !== "recorder" && (
         <div className={clsx(screenStyles.footer)}>
-          <CallControls onAction={handleAction} />
+          <CallControls
+            isInfoOverlayOpen={isInfoOverlayOpen}
+            sidebarMode={sidebarMode.mode}
+            onInfoPress={handleInfoPress}
+            onCallLeftPress={handleCallLeftPress}
+            onParticipantsPress={handleParticipantsPress}
+            onChatPress={handleChatPress}
+          />
         </div>
       )}
       {mode === "recorder" && <span id="egress-ready-for-capture" />}

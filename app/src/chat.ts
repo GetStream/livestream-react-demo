@@ -1,6 +1,6 @@
-import { useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { useCall, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { useEffect, useMemo, useState } from "react";
-import { StreamChat } from "stream-chat";
+import { Channel, StreamChat } from "stream-chat";
 
 export function useChatClient() {
   const videoClient = useStreamVideoClient();
@@ -45,4 +45,44 @@ export function useChatClient() {
   }, [credentials]);
 
   return client;
+}
+
+export function useChannel(client: StreamChat | undefined) {
+  const callId = useCall()?.id;
+  const channel = useMemo(
+    () => (client && callId ? client.channel("videocall", callId) : undefined),
+    [client, callId]
+  );
+
+  useEffect(() => {
+    if (channel && !channel.initialized) {
+      channel.watch();
+    }
+  }, [channel]);
+
+  return channel;
+}
+
+export function useChannelUnreadCount(channel: Channel | undefined) {
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (channel) {
+      const handleUnreadChange = () => {
+        setUnreadCount(channel.state.unreadCount);
+      };
+
+      channel.on("message.new", handleUnreadChange);
+      channel.on("message.read", handleUnreadChange);
+      channel.on("notification.mark_read", handleUnreadChange);
+
+      return () => {
+        channel.off("message.new", handleUnreadChange);
+        channel.off("message.read", handleUnreadChange);
+        channel.off("notification.mark_read", handleUnreadChange);
+      };
+    }
+  }, [channel]);
+
+  return unreadCount;
 }
