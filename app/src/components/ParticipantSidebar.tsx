@@ -10,6 +10,8 @@ import { User } from "./User";
 export function ParticipantSidebar(props: { onClose: () => void }) {
   const { useCallSession } = useCallStateHooks();
   const session = useCallSession();
+  const viewers =
+    session?.participants.filter((p) => !p.user.custom.host) ?? [];
 
   return (
     <div className={styles._}>
@@ -23,15 +25,19 @@ export function ParticipantSidebar(props: { onClose: () => void }) {
           <Icon icon="close" />
         </Button>
       </div>
-      <ul className={styles.list}>
-        {session?.participants
-          .filter((p) => !p.user.custom.host)
-          .map((p) => (
-            <li key={p.user_session_id}>
-              <User user={p.user} />
-            </li>
-          ))}
-      </ul>
+      {viewers.length > 0 ? (
+        <ul className={styles.list}>
+          {session?.participants
+            .filter((p) => !p.user.custom.host)
+            .map((p) => (
+              <li key={p.user_session_id}>
+                <User user={p.user} />
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <div>No viewers here... Yet!</div>
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ import { useChannel } from "../chat";
 import { fallbackAvatarColor, initialsFromName } from "../user";
 import { Spinner } from "./Icon";
 import userStyles from "./User.module.css";
+import styles from "./ChatEmbed.module.css";
 
 export default function ChatEmbed(props: { client: StreamChat }) {
   const channel = useChannel(props.client);
@@ -25,6 +26,7 @@ export default function ChatEmbed(props: { client: StreamChat }) {
         channel={channel}
         LoadingIndicator={LoadingIndicator}
         LoadingErrorIndicator={LoadingErrorIndicator}
+        EmptyStateIndicator={EmptyStateIndicator}
         Avatar={Avatar}
         activeUnreadHandler={() => {}}
       >
@@ -43,6 +45,10 @@ function LoadingIndicator() {
 
 function LoadingErrorIndicator(props: LoadingErrorIndicatorProps) {
   return <div>{props.error?.message}</div>;
+}
+
+function EmptyStateIndicator() {
+  return <div className={styles.placeholder}>No messages here... Yet!</div>;
 }
 
 export function Avatar(props: AvatarProps) {
