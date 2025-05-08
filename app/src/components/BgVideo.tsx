@@ -8,7 +8,11 @@ export function BgVideo() {
   return (
     <video
       className={clsx(styles._, isReady && styles._ready)}
-      src="/aura.mp4"
+      src="/ripple.mp4"
+      autoPlay
+      playsInline
+      muted
+      loop
       onCanPlayThrough={() => setIsReady(true)}
     />
   );
