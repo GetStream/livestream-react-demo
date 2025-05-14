@@ -27,9 +27,7 @@ export function ReactionControl() {
   const { useCallCallingState } = useCallStateHooks();
   const callingState = useCallCallingState();
   const [isOpen, setIsOpen] = useState(false);
-  const [cooldownUntil, setCooldownUntil] = useState<Date | undefined>(
-    undefined
-  );
+  const [cooldownUntil, setCooldownUntil] = useState<Date>();
   const [cooldownSecondsLeft, setCooldownSecondsLeft] = useState(Number.NaN);
 
   useEffect(() => {

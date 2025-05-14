@@ -11,7 +11,7 @@ export function useChatClient() {
     () => (apiKey && token && userId ? { apiKey, token, userId } : undefined),
     [apiKey, token, userId]
   );
-  const [client, setClient] = useState<StreamChat | undefined>(undefined);
+  const [client, setClient] = useState<StreamChat>();
 
   useEffect(() => {
     if (!credentials) {

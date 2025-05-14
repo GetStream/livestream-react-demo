@@ -3,7 +3,7 @@ import { useCallback, useLayoutEffect, useRef } from "react";
 export function useEffectEvent<P extends unknown[]>(
   cb: ((...args: P) => void) | undefined
 ): (...args: P) => void {
-  const cbRef = useRef<((...args: P) => void) | undefined>(undefined);
+  const cbRef = useRef<(...args: P) => void>(undefined);
 
   useLayoutEffect(() => {
     cbRef.current = cb;

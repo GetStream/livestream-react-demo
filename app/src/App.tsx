@@ -9,20 +9,27 @@ import { LiveScreen } from "./components/LiveScreen";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { RecorderPlaceholderScreen } from "./components/RecorderPlaceholderScreen";
 import { viewerModeStore } from "./stores/viewerMode";
+import { ErrorScreen } from "./components/ErrorScreen";
 
 function App() {
   const { mode, viewCallId } = useStore(viewerModeStore);
   const client = useClient(mode);
-  const [hostCall, setHostCall] = useState<Call | undefined>(undefined);
-  const viewCall = useGetCall(client, viewCallId);
-  const call = hostCall ?? viewCall;
   const [hasEnded, setHasEnded] = useState(false);
+  const [error, setError] = useState<string>();
 
   const handleCallEnded = () => {
     setHasEnded(true);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (window as any)._call;
   };
+
+  const handleCallError = (error: string) => {
+    setError(error);
+  };
+
+  const [hostCall, setHostCall] = useState<Call>();
+  const viewCall = useGetCall(client, viewCallId, handleCallError);
+  const call = hostCall ?? viewCall;
 
   useCallEnded(call, handleCallEnded);
 
@@ -39,11 +46,16 @@ function App() {
       (window as any)._call = call;
     } catch (err) {
       console.error("Could not create call", err);
+      handleCallError("Could not create livestream");
     }
   };
 
   if (!client) {
     return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <ErrorScreen>{error}</ErrorScreen>;
   }
 
   if (hasEnded) {

@@ -1,9 +1,12 @@
 import {
   ParticipantView,
+  useCall,
   type StreamVideoParticipant,
 } from "@stream-io/video-react-sdk";
+import { useEffect, useState } from "react";
 import styles from "./LivePlayer.module.css";
 import { SpeakingIndicator } from "./SpeakingIndicator";
+import { getSecondsUntil } from "./clock";
 import { useHostParticipant, type ParticipantTrackFlags } from "./participants";
 
 export default function LivePlayer() {
@@ -26,7 +29,7 @@ export default function LivePlayer() {
           <Overlay participant={host} />
         </>
       ) : (
-        <PlaceholderOverlay />
+        <Placeholder />
       )}
     </div>
   );
@@ -46,7 +49,7 @@ function Overlay(props: {
         <span>
           {props.participant.name}
           {props.participant.isSpeaking && <> is speaking</>}
-          {hasNoTracks && <> is offline</>}
+          {hasNoTracks && <> is muted</>}
         </span>
         {props.participant.isSpeaking && (
           <div className={styles.speakingIndicator}>
@@ -68,10 +71,30 @@ function Overlay(props: {
   );
 }
 
-function PlaceholderOverlay() {
+function Placeholder() {
+  // const call = useCall();
+  // const timeoutSeconds = 10;
+  // const [secondsLeft, setSecondsLeft] = useState(timeoutSeconds);
+
+  // useEffect(() => {
+  //   const leaveAt = new Date(Date.now() + timeoutSeconds * 1000);
+  //   const handle = setInterval(() => {
+  //     const secondsLeft = getSecondsUntil(leaveAt);
+  //     setSecondsLeft(secondsLeft);
+
+  //     if (secondsLeft === 0) {
+  //       clearInterval(handle);
+  //       call?.leave();
+  //     }
+  //   });
+
+  //   return () => clearInterval(handle);
+  // }, [call]);
+
   return (
-    <div className={styles.overlay_placeholder}>
-      <div className={styles.nametag}>Livestream is offline</div>
+    <div className={styles.placeholder}>
+      <div>Host is offline</div>
+      {/* <div>Leaving livestream in {secondsLeft} seconds</div> */}
     </div>
   );
 }

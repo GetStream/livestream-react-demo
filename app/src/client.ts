@@ -5,9 +5,7 @@ import type { RecorderState } from "./stores/recorderStore";
 import { getUserData } from "./user";
 
 export function useClient(mode: "host" | "viewer" | "recorder") {
-  const [client, setClient] = useState<StreamVideoClient | undefined>(
-    undefined
-  );
+  const [client, setClient] = useState<StreamVideoClient>();
 
   useEffect(() => {
     let cancel = false;
@@ -52,9 +50,7 @@ export function useClient(mode: "host" | "viewer" | "recorder") {
 }
 
 export function useRecorderClient(state: RecorderState) {
-  const [client, setClient] = useState<StreamVideoClient | undefined>(
-    undefined
-  );
+  const [client, setClient] = useState<StreamVideoClient>();
 
   useEffect(() => {
     if (state.ready) {

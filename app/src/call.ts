@@ -1,5 +1,6 @@
 import {
   CallingState,
+  ErrorFromResponse,
   type Call,
   type StreamVideoClient,
 } from "@stream-io/video-react-sdk";
@@ -64,9 +65,11 @@ export async function goLive(call: Call) {
 
 export function useGetCall(
   client: StreamVideoClient | undefined,
-  callId: string | null
+  callId: string | null,
+  onError?: (reason: string) => void
 ) {
-  const [call, setCall] = useState<Call | undefined>(undefined);
+  const [call, setCall] = useState<Call>();
+  const handleError = useEffectEvent(onError);
 
   useEffect(() => {
     if (client && callId) {
@@ -82,6 +85,20 @@ export function useGetCall(
         })
         .catch((err) => {
           console.error("Could not get call", err);
+          let message = "Could not load livestream";
+
+          if (err instanceof ErrorFromResponse) {
+            switch (err.status) {
+              case 403:
+                message = "Livestream has already ended";
+                break;
+              case 404:
+                message = "Livestream not found";
+                break;
+            }
+          }
+
+          handleError(message);
         });
 
       return () => {
@@ -92,7 +109,7 @@ export function useGetCall(
         setCall(undefined);
       };
     }
-  }, [client, callId]);
+  }, [client, callId, handleError]);
 
   return call;
 }
