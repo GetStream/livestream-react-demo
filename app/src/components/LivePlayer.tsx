@@ -1,13 +1,10 @@
 import {
   ParticipantView,
-  useCall,
   type StreamVideoParticipant,
-} from "@stream-io/video-react-sdk";
-import { useEffect, useState } from "react";
-import styles from "./LivePlayer.module.css";
-import { SpeakingIndicator } from "./SpeakingIndicator";
-import { getSecondsUntil } from "./clock";
-import { useHostParticipant, type ParticipantTrackFlags } from "./participants";
+} from '@stream-io/video-react-sdk';
+import styles from './LivePlayer.module.css';
+import { SpeakingIndicator } from './SpeakingIndicator';
+import { type ParticipantTrackFlags, useHostParticipant } from './participants';
 
 export default function LivePlayer() {
   const host = useHostParticipant();
