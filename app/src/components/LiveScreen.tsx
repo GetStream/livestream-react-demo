@@ -20,6 +20,7 @@ import { Tutorial } from "./Tutorial";
 import { useBackstage } from "./useBackstage";
 import { useBroadcastMethod } from "./useBroadcastMethod";
 import { ChatSidebar } from "./ChatSidebar";
+import { StreamStatsOverlay } from "./StreamStatsOverlay";
 import type { StreamChat } from "stream-chat";
 
 type SidebarMode =
@@ -108,6 +109,9 @@ export function LiveScreen(props: { onCallLeft?: () => void }) {
             </div>
           )}
           <ReactionsOverlay />
+          {isLive && mode === "host" && (
+            <StreamStatsOverlay protocol={method as 'srt' | 'rtmp' | 'webrtc'} />
+          )}
         </div>
         <Sidebar isOpen={sidebarMode.mode !== "hidden"}>
           {sidebarMode.mode === "participants" ? (

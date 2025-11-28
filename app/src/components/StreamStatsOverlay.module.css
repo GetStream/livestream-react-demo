@@ -1,0 +1,161 @@
+.overlay {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 280px;
+  padding: 12px;
+  z-index: 100;
+  color: #fafafa;
+  font-size: 13px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ffffff1a;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fafafa;
+}
+
+.collapseButton {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #656b72;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.collapseButton:hover {
+  color: #fafafa;
+  background: #ffffff0d;
+}
+
+/* Alerts Section */
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.alert_warning {
+  background: #ff9e3319;
+  color: #ffb84d;
+  border: 1px solid #ff9e3333;
+}
+
+.alert_critical {
+  background: #ff6b6b19;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b33;
+}
+
+.alert svg {
+  flex-shrink: 0;
+}
+
+/* Sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ffffff0d;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Metric with Chart */
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metricHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.metricLabel {
+  font-size: 11px;
+  color: #656b72;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.metricValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fafafa;
+}
+
+.metricTarget {
+  font-size: 11px;
+  color: #656b72;
+  font-weight: 400;
+  margin-left: 2px;
+}
+
+.metricUnit {
+  font-size: 11px;
+  color: #656b72;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+/* Static Info Section */
+.staticInfo {
+  gap: 8px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.infoLabel {
+  font-size: 11px;
+  color: #656b72;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.infoValue {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fafafa;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+}
